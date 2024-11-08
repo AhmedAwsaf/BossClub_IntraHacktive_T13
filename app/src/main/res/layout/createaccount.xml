@@ -11,22 +11,22 @@
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="text"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_background"
-        android:layout_marginBottom="16dp" />
-
-
-    <EditText
-        android:id="@+id/fullNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Full Name"
         android:inputType="text"
         android:padding="12dp"
         android:background="@drawable/edit_text_background"
         android:layout_marginBottom="16dp" />
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/fullNameEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Full Name"-->
+<!--        android:inputType="text"-->
+<!--        android:padding="12dp"-->
+<!--        android:background="@drawable/edit_text_background"-->
+<!--        android:layout_marginBottom="16dp" />-->
 
     <EditText
         android:id="@+id/emailEditText"
@@ -38,16 +38,16 @@
         android:background="@drawable/edit_text_background"
         android:layout_marginBottom="16dp" />
 
-    <!-- Role input -->
+    <!-- Phone input -->
     <EditText
-        android:id="@+id/roleEditText"
+        android:id="@+id/phoneNumberText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Role"
-        android:inputType="text"
-        android:padding="12dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/edit_text_background"
-        android:layout_marginBottom="16dp" />
+        android:hint="Phone Number"
+        android:inputType="text"
+        android:padding="12dp" />
 
     <!-- Club Name Label -->
     <TextView
@@ -85,7 +85,7 @@
         android:id="@+id/departmentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Department"
+        android:hint="Department eg. CSE"
         android:inputType="text"
         android:padding="12dp"
         android:background="@drawable/edit_text_background"

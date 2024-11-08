@@ -1,4 +1,5 @@
 package com.example.bossapp
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.userlogin)
+
 
         // Set up the login button
         val loginButton = findViewById<Button>(R.id.loginButton)
