@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,6 +21,20 @@ class LoginActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+
+        auth.addAuthStateListener { auth ->
+            val user: FirebaseUser? = auth.currentUser
+
+            if (user != null) {
+                // User is signed in
+                Toast.makeText(this, "User signed in: ${user.email}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                // No user is signed in
+                Toast.makeText(this, "No user signed in", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // Set up the login button
         val loginButton = findViewById<Button>(R.id.loginButton)

@@ -9,7 +9,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CreateAccountActivity : AppCompatActivity() {
@@ -41,6 +41,7 @@ class CreateAccountActivity : AppCompatActivity() {
             val phoneNumber = findViewById<EditText>(R.id.phoneNumberText).text.toString()
             val email = findViewById<EditText>(R.id.emailEditText).text.toString()
             val selectedClub = clubSpinner.selectedItem.toString()
+            val club_dept = findViewById<EditText>(R.id.club_deptEditText).text.toString()
             val password = findViewById<EditText>(R.id.passwordEditText).text.toString()
             val semester = findViewById<EditText>(R.id.semesterEditText).text.toString()
             val department = findViewById<EditText>(R.id.departmentEditText).text.toString()
@@ -49,14 +50,14 @@ class CreateAccountActivity : AppCompatActivity() {
             if (username.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty() &&
                 selectedClub.isNotEmpty() && password.isNotEmpty() && semester.isNotEmpty() && department.isNotEmpty()
             ) {
-                createUser(email, password, username, phoneNumber, semester, department, selectedClub)
+                createUser(email, password, username, phoneNumber, semester, department, selectedClub, club_dept)
             } else {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun createUser(email: String, password: String, username: String, phoneNumber: String, semester: String, department: String, club: String) {
+    private fun createUser(email: String, password: String, username: String, phoneNumber: String, semester: String, department: String, club: String, clubdept:String) {
         // Check if the email has the correct domain
         if (email.endsWith("@g.bracu.ac.bd") || email.endsWith("@bracu.ac.bd")) {
             // Proceed with account creation if the email domain is valid
@@ -66,7 +67,7 @@ class CreateAccountActivity : AppCompatActivity() {
                         // Account creation successful
                         val user = auth.currentUser
                         user?.let {
-                            saveUserDataToFirestore(it.uid, username, phoneNumber, semester, department, club)
+                            saveUserDataToFirestore(it.uid, username, phoneNumber, semester, department, club, clubdept)
                         }
 
                         val intent = Intent(this, LoginActivity::class.java)
@@ -82,7 +83,7 @@ class CreateAccountActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserDataToFirestore(userId: String, username: String, phoneNumber: String, semester: String, department: String, club: String) {
+    private fun saveUserDataToFirestore(userId: String, username: String, phoneNumber: String, semester: String, department: String, club: String, clubdept:String) {
         val db = FirebaseFirestore.getInstance()
 
         // Define the custom data for the user
@@ -92,7 +93,12 @@ class CreateAccountActivity : AppCompatActivity() {
             "semester" to semester,
             "department" to department,
             "club" to club,
-            "profilePictureUrl" to "default.jpg" // Update this with an actual picture URL if available
+            "profilePictureUrl" to "default.jpg", // Update this with an actual picture URL if available
+            "user_type" to "student",  // Dummy data for user type
+            "club_role" to "General Member",  // Dummy data for club role
+            "club_clr_level" to 1,  // Dummy data for club color level
+            "club_dept" to clubdept, // Dummy data for club department
+            "created_at" to FieldValue.serverTimestamp()
         )
 
         // Save the custom user data in Firestore under the "users" collection
