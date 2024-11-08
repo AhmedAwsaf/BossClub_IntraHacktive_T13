@@ -1,11 +1,8 @@
 package com.example.bossapp
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,22 +16,12 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        // Load user preference for theme mode
-        val sharedPreferences = getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
-        val isDarkModeEnabled = sharedPreferences.getBoolean("dark_mode", false)
 
         setContent {
-            var isDarkTheme by remember { mutableStateOf(isDarkModeEnabled) }
+            var isDarkTheme by remember { mutableStateOf(false) }
 
-            // Save theme preference whenever the user toggles the switch
-            LaunchedEffect(isDarkTheme) {
-                with(sharedPreferences.edit()) {
-                    putBoolean("dark_mode", isDarkTheme)
-                    apply()
-                }
-            }
+            // Remove theme preferences and keep the toggle switch functionality
+            // The theme will always be the default light mode
 
             BossAppTheme(darkTheme = isDarkTheme) {
                 Scaffold(
@@ -69,7 +56,7 @@ fun MainContent(
         Greeting(name = "Android")
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Theme toggle switch
+        // Theme toggle switch (can be removed if no longer needed)
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {

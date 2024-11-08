@@ -42,9 +42,10 @@
                 android:id="@+id/eventButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/event" <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Event"/>
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/event_button_description"
+                android:scaleType="fitCenter"
+                android:src="@drawable/event" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,16 +62,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            tools:ignore="ExtraText">
 
             <ImageButton
                 android:id="@+id/budgetButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/budget"
-                tools:ignore="ImageContrastCheck" /> <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Budget"/>
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Budget" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,16 +89,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+
             android:padding="8dp">
 
             <ImageButton
                 android:id="@+id/roomButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/room" <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Room Booking"/>
+                android:src="@drawable/room"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Room Booking"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,10 +122,10 @@
                 android:id="@+id/announcementButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/announcements" <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Announcements"/>
+                android:src="@drawable/announcements"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Announcements"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,6 +133,7 @@
                 android:text="Announcements"
                 android:textSize="16sp"
                 android:gravity="center"
+
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -145,10 +149,10 @@
                 android:id="@+id/surveyButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/survey" <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Survey"/>
+                android:src="@drawable/survey"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Survey"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -171,10 +175,10 @@
                 android:id="@+id/communicateButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/communication" <!-- Replace with actual drawable -->
-            android:background="@android:color/transparent"
-            android:contentDescription="Communicate"/>
+                android:src="@drawable/communication"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Communicate"/>
 
             <TextView
                 android:layout_width="wrap_content"

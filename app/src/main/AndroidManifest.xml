@@ -15,9 +15,11 @@
 
         <!-- Splash Activity as the Launcher Activity -->
         <activity
+
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.BossApp">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
