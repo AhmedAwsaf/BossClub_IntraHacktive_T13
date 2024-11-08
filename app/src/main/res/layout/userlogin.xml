@@ -27,7 +27,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:elevation="4dp"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="text"
         android:padding="16dp" />
 

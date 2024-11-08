@@ -7,26 +7,44 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+
+    // Firebase Auth instance
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.userlogin)
 
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
 
         // Set up the login button
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
-            // Handle login logic here
-            val username = findViewById<EditText>(R.id.usernameEditText).text.toString()
+            val email = findViewById<EditText>(R.id.usernameEditText).text.toString()
             val password = findViewById<EditText>(R.id.passwordEditText).text.toString()
 
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                // Add authentication code here
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                // Sign in with Firebase Auth
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Login successful
+                            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                            // Navigate to the main activity or home screen
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish() // Close login activity
+                        } else {
+                            // Login failed
+                            Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             } else {
-                Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
             }
         }
 
