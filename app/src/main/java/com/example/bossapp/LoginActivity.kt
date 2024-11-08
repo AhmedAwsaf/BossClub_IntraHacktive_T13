@@ -30,9 +30,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "User signed in: ${user.email}", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            } else {
-                // No user is signed in
-                Toast.makeText(this, "No user signed in", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -50,9 +47,9 @@ class LoginActivity : AppCompatActivity() {
                             // Login successful
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             // Navigate to the main activity or home screen
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish() // Close login activity
+//                            val intent = Intent(this, MainActivity::class.java)
+//                            startActivity(intent)
+//                            finish() // Close login activity
                         } else {
                             // Login failed
                             Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
