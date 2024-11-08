@@ -25,18 +25,10 @@ class RoomActivity : AppCompatActivity() {
 
         bookRoomButton.setOnClickListener {
             val roomNumber = roomNumberEditText.text.toString()
-            val startHour = startTimePicker.hour
-            val startMinute = startTimePicker.minute
-            val endHour = endTimePicker.hour
-            val endMinute = endTimePicker.minute
             val purpose = purposeEditText.text.toString()
 
             if (roomNumber.isNotEmpty() && purpose.isNotEmpty()) {
                 val intent = Intent(this, BookedRoomActivity::class.java)
-                intent.putExtra("roomNumber", roomNumber)
-                intent.putExtra("startTime", "$startHour:$startMinute")
-                intent.putExtra("endTime", "$endHour:$endMinute")
-                intent.putExtra("purpose", purpose)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
