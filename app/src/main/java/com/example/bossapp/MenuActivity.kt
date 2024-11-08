@@ -57,16 +57,15 @@ class MenuActivity : AppCompatActivity() {
             db.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
+                        Toast.makeText(this, "User data found ${document.data}", Toast.LENGTH_SHORT).show()
                         val username = document.getString("username") ?: ""
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
-                        val clubRole = document.getString("club_role") ?: "Member"
 
                         // Display data on the menu screen
-                        findViewById<TextView>(R.id.usernameTextView).text = username
-                        findViewById<TextView>(R.id.clubTextView).text = "Club: $club"
-                        findViewById<TextView>(R.id.departmentTextView).text = "Department: $department"
-                        findViewById<TextView>(R.id.clubRoleTextView).text = "Role: $clubRole"
+                        findViewById<TextView>(R.id.userNameText).text = username
+                        findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
+                        findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
                     } else {
                         Toast.makeText(this, "No user data found", Toast.LENGTH_SHORT).show()
                     }

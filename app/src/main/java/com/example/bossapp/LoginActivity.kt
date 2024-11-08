@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (user != null) {
                 // User is signed in
-                Toast.makeText(this, "User signed in: ${user.email}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "User signed in: ${user.email}", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }

@@ -51,11 +51,11 @@
                 android:layout_height="15dp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/club_deptText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text="Club Department"
                 android:textAlignment="textStart"
                 android:textStyle="bold" />
         </LinearLayout>
