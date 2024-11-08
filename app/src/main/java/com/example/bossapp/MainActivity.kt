@@ -16,8 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.user_menu)
 
         val auth = FirebaseAuth.getInstance()
-        
-
+        val currentUser: FirebaseUser? = auth.currentUser
 
         // Set up button click listeners
         findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
