@@ -51,6 +51,10 @@
             android:exported="true"
             android:label="Create Account"
             android:theme="@style/Theme.BossApp" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="true"
+            android:label="Menu" />
 
     </application>
 
