@@ -55,6 +55,11 @@
             android:name=".MenuActivity"
             android:exported="true"
             android:label="Menu" />
+        <activity
+            android:name=".RoomActivity"
+            android:exported="true"
+            android:label="Room Booking"/>
+
 
     </application>
 

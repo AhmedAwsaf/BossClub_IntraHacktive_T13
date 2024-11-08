@@ -1,86 +1,45 @@
 package com.example.bossapp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.bossapp.ui.theme.BossAppTheme
+import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.user_menu)
 
-        setContent {
-            var isDarkTheme by remember { mutableStateOf(false) }
-
-            // Remove theme preferences and keep the toggle switch functionality
-            // The theme will always be the default light mode
-
-            BossAppTheme(darkTheme = isDarkTheme) {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopAppBar(title = { Text("BossApp") })
-                    },
-                    content = { innerPadding ->
-                        MainContent(
-                            isDarkTheme = isDarkTheme,
-                            onThemeToggle = { isDarkTheme = !isDarkTheme },
-                            modifier = Modifier.padding(innerPadding)
-                        )
-                    }
-                )
-            }
+        // Set up button click listeners
+        findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
+            // Navigate to Event activity
+            // startActivity(Intent(this, EventActivity::class.java))
         }
-    }
-}
 
-@Composable
-fun MainContent(
-    isDarkTheme: Boolean,
-    onThemeToggle: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Greeting(name = "Android")
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Theme toggle switch (can be removed if no longer needed)
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Enable Dark Mode")
-            Switch(
-                checked = isDarkTheme,
-                onCheckedChange = { onThemeToggle() }
-            )
+        findViewById<ImageButton>(R.id.budgetButton).setOnClickListener {
+            // Navigate to Budget activity
+            // startActivity(Intent(this, BudgetActivity::class.java))
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
+            // Navigate to Room booking activity
+            startActivity(Intent(this, RoomActivity::class.java))
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BossAppTheme {
-        Greeting("Android")
+        findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
+            // Navigate to Announcement activity
+            // startActivity(Intent(this, AnnouncementActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
+            // Navigate to Survey activity
+            // startActivity(Intent(this, SurveyActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
+            // Navigate to Communicate activity
+            // startActivity(Intent(this, CommunicateActivity::class.java))
+        }
     }
 }

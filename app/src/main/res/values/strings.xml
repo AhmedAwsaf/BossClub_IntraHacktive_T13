@@ -7,6 +7,6 @@
         <item>BULC</item>
     </string-array>
     <string name="event_button_description">Event Button, Opens the event section</string>
-    <string name="event_button_description" tools:ignore="DuplicateDefinition">Event button, tap to view events</string>
+
 
 </resources>
