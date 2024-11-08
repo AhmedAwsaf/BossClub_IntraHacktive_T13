@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Budget Image -->
+        <ImageView
+            android:id="@+id/budgetImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/budget"
+            android:contentDescription="Budget Image"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Value Input -->
+        <EditText
+            android:id="@+id/valueEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Budget Value"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <!-- Reason Input -->
+        <EditText
+            android:id="@+id/reasonEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Enter Reason"
+            android:minHeight="48dp" />
+
+        <!-- Description Input -->
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Description"
+            android:layout_marginTop="16dp"
+            android:inputType="textMultiLine"
+            android:lines="3" />
+
+        <!-- Spend Amount Input -->
+        <EditText
+            android:id="@+id/spendAmountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Enter Spend Amount"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Request"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+</ScrollView>

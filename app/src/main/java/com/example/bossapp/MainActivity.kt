@@ -20,22 +20,27 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
 
-        // Check if the user is logged in
+        // Check if the user is logged in, if not redirect to LoginActivity
+        val currentUser = auth.currentUser
         if (currentUser == null) {
-            // If not logged in, redirect to LoginActivity
             redirectToLogin()
         }
 
-        // Set up button click listeners
+        // Setup button click listeners
         setupButtonListeners()
     }
 
+    // Function to handle button navigation
     private fun setupButtonListeners() {
-        // Room Booking Button - navigate to BookedRoomActivity
+        // Navigate to BookedRoomActivity
         findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
-            startActivity(Intent(this, BookedRoomActivity::class.java))
+            navigateToActivity(BookedRoomActivity::class.java)
+        }
+
+        // Navigate to BudgetActivity
+        findViewById<ImageButton>(R.id.budgetButton).setOnClickListener {
+            navigateToActivity(BudgetActivity::class.java)
         }
 
         // Sign Out Button with Confirmation
@@ -44,18 +49,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Generic function to navigate to a specified activity
+    private fun navigateToActivity(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
+    }
+
     // Method to show sign-out confirmation dialog
     private fun showSignOutDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Sign Out")
-        builder.setMessage("Are you sure you want to sign out?")
-        builder.setPositiveButton("Yes") { _, _ ->
-            auth.signOut()
-            Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show()
-            redirectToLogin()
-        }
-        builder.setNegativeButton("No", null)
-        builder.show()
+        AlertDialog.Builder(this)
+            .setTitle("Sign Out")
+            .setMessage("Are you sure you want to sign out?")
+            .setPositiveButton("Yes") { _, _ ->
+                auth.signOut()
+                Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show()
+                redirectToLogin()
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     // Method to redirect to LoginActivity

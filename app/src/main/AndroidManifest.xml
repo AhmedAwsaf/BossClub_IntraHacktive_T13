@@ -63,6 +63,10 @@
             android:name=".BookedRoomActivity"
             android:exported="true"
             android:label="Booked Rooms"/>
+        <activity
+            android:name=".BudgetActivity"
+            android:exported="true"
+            android:label="Budget Requests"/>
 
 
 
