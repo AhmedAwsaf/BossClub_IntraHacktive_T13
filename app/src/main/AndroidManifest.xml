@@ -59,6 +59,11 @@
             android:name=".RoomActivity"
             android:exported="true"
             android:label="Room Booking"/>
+        <activity
+            android:name=".BookedRoomActivity"
+            android:exported="true"
+            android:label="Booked Rooms"/>
+
 
 
     </application>

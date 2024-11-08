@@ -1,5 +1,6 @@
 package com.example.bossapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -13,20 +14,16 @@ class RoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.room)
 
-        // Get references to the form elements
         val roomNumberEditText: EditText = findViewById(R.id.roomNumber)
         val startTimePicker: TimePicker = findViewById(R.id.startTime)
         val endTimePicker: TimePicker = findViewById(R.id.endTime)
         val purposeEditText: EditText = findViewById(R.id.purpose)
         val bookRoomButton: Button = findViewById(R.id.submitButton)
 
-        // Set the TimePicker to 24-hour mode if desired
         startTimePicker.setIs24HourView(true)
         endTimePicker.setIs24HourView(true)
 
-        // Set the OnClickListener for the button
         bookRoomButton.setOnClickListener {
-            // Get the user input
             val roomNumber = roomNumberEditText.text.toString()
             val startHour = startTimePicker.hour
             val startMinute = startTimePicker.minute
@@ -34,8 +31,16 @@ class RoomActivity : AppCompatActivity() {
             val endMinute = endTimePicker.minute
             val purpose = purposeEditText.text.toString()
 
-            // Display a Toast message as confirmation (you can replace this with actual booking logic)
-            Toast.makeText(this, "Room $roomNumber booked from $startHour:$startMinute to $endHour:$endMinute for: $purpose", Toast.LENGTH_LONG).show()
+            if (roomNumber.isNotEmpty() && purpose.isNotEmpty()) {
+                val intent = Intent(this, BookedRoomActivity::class.java)
+                intent.putExtra("roomNumber", roomNumber)
+                intent.putExtra("startTime", "$startHour:$startMinute")
+                intent.putExtra("endTime", "$endHour:$endMinute")
+                intent.putExtra("purpose", purpose)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
