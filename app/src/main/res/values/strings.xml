@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BossApp</string>
+    <string-array name="club_options">
+        <item>BUCC</item>
+        <item>BIZBEE</item>
+        <item>ROBU</item>
+        <item>BULC</item>
+    </string-array>
+</resources>

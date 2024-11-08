@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030636913218",
+    "project_id": "appaaa-67c08",
+    "storage_bucket": "appaaa-67c08.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030636913218:android:5b5c5bd5c7d072b24063db",
+        "android_client_info": {
+          "package_name": "com.example.bossapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT54MtMdmnUx2aGMrgwRbBZhH1e9yLvQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
