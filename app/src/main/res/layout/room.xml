@@ -11,6 +11,8 @@
         android:gravity="center"
         android:padding="16dp">
 
+        <!-- Room Selection Spinner -->
+
         <!-- Room Image -->
         <ImageView
             android:id="@+id/roomImage"
@@ -21,15 +23,35 @@
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Room Number Input -->
+        <!-- Purpose of Booking Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Select Room"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/roomSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp" />
+
         <EditText
-            android:id="@+id/roomNumber"
+            android:id="@+id/purpose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Room Number"
-            android:inputType="number"
+            android:hint="Purpose of Booking"
+            android:inputType="text"
             android:minHeight="48dp" />
+
+        <!-- Date Selection -->
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
 
         <!-- Start Time Picker -->
         <TextView
@@ -60,16 +82,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:timePickerMode="spinner"/>
-
-        <!-- Purpose Input -->
-        <EditText
-            android:id="@+id/purpose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="Purpose of Booking"
-            android:inputType="text"
-            android:minHeight="48dp" />
 
         <!-- Submit Button -->
         <Button

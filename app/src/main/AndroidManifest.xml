@@ -76,6 +76,16 @@
             android:exported="true"
             android:label="Announcement"/>
 
+        <activity
+            android:name=".EventActivity"
+            android:exported="true"
+            android:label="Shows Events"/>
+
+        <activity
+            android:name=".CreateEventActivity"
+            android:exported="true"
+            android:label="Creates Events"/>
+
 
 
     </application>
