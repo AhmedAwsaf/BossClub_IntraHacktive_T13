@@ -61,12 +61,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Set up the admin login link
-        val adminLoginLink = findViewById<TextView>(R.id.adminLoginLink)
-        adminLoginLink.setOnClickListener {
-            // Navigate to the Admin Login page
-            val intent = Intent(this, AdminLoginActivity::class.java)
-            startActivity(intent)
-        }
+//        val adminLoginLink = findViewById<TextView>(R.id.adminLoginLink)
+//        adminLoginLink.setOnClickListener {
+//            // Navigate to the Admin Login page
+//            val intent = Intent(this, AdminLoginActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // Set up the create account link
         val createAccountLink = findViewById<TextView>(R.id.createAccountLink)

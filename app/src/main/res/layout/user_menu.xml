@@ -233,11 +233,28 @@
 
     <!-- User Info Section -->
 
-    <Button
-        android:id="@+id/signoutBtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:minHeight="48dp"
-        android:text="Logout" />
+        android:layout_height="105dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/signoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:text="Logout" />
+
+        <Button
+            android:id="@+id/specialBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:text="OCA Info"
+            android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

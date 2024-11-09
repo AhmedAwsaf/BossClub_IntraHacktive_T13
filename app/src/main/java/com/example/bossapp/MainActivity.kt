@@ -3,6 +3,7 @@ package com.example.bossapp
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -55,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         // Sign Out Button with Confirmation
         findViewById<Button>(R.id.signoutBtn).setOnClickListener {
             showSignOutDialog()
+        }
+        
+        // Special Button
+        val specialbtn = findViewById<Button>(R.id.specialBtn)
+        specialbtn.setOnClickListener {
+            navigateToActivity(SpecialActivity::class.java)
         }
 
         findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
@@ -112,11 +119,19 @@ class MainActivity : AppCompatActivity() {
                         val username = document.getString("username") ?: ""
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
+                        val user_type = document.getString("user_type") ?: ""
 
                         // Display data on the menu screen
                         findViewById<TextView>(R.id.userNameText).text = username
                         findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
+
+                        if (user_type == "oca") {
+                            findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
+                            findViewById<TextView>(R.id.clubNameText).text = "OCA"
+                            findViewById<TextView>(R.id.club_deptText).text = "Admin"
+                        }
+
                     } else {
                         Toast.makeText(this, "No user data found", Toast.LENGTH_SHORT).show()
                     }

@@ -86,6 +86,11 @@
             android:exported="true"
             android:label="Creates Events"/>
 
+        <activity
+            android:name=".SpecialActivity"
+            android:exported="true"
+            android:label="Does special features only for OCA"/>
+
 
 
     </application>

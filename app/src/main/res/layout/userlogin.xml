@@ -58,18 +58,18 @@
         android:textColor="#FFFFFF" />
 
     <!-- Hyperlink for Admin Login -->
-    <TextView
-        android:id="@+id/adminLoginLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:fontFamily="sans-serif-medium"
-        android:minHeight="48dp"
-        android:text="Admin Login"
-        android:textColor="#6200EA"
-        android:textSize="16sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/adminLoginLink"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:clickable="true"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:text="Admin Login"-->
+<!--        android:textColor="#6200EA"-->
+<!--        android:textSize="16sp" />-->
 
     <!-- Hyperlink for Create an Account -->
     <TextView
