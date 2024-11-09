@@ -16,7 +16,7 @@ class RoomActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var selectedDate: String = ""
     private lateinit var roomSpinner: Spinner
-    private lateinit var roomId: String // Selected room ID
+    private lateinit var roomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +35,8 @@ class RoomActivity : AppCompatActivity() {
         startTimePicker.setIs24HourView(false)
         endTimePicker.setIs24HourView(false)
 
-        // Fetch and populate room IDs
         populateRoomSpinner()
 
-        // Set up CalendarView to get selected date
         datePicker.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
@@ -55,7 +53,7 @@ class RoomActivity : AppCompatActivity() {
                 if (isFutureDateTime(selectedDate, startTime) && isEndTimeAfterStartTime(startTime, endTime)) {
                     checkAndBookRoom(roomId, purpose, startTime, endTime, selectedDate)
                 } else {
-                    Toast.makeText(this, "Booking date and start time must be in the future, and end time must be after start time", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Booking date/time must be in the future and end time must be after start time", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -75,7 +73,7 @@ class RoomActivity : AppCompatActivity() {
 
             roomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                    roomId = roomIds[position] // Set selected room ID
+                    roomId = roomIds[position]
                 }
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
@@ -100,7 +98,7 @@ class RoomActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, hour)
         calendar.set(Calendar.MINUTE, minute)
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault()) // AM/PM format
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return timeFormat.format(calendar.time)
     }
 
@@ -116,33 +114,29 @@ class RoomActivity : AppCompatActivity() {
             db.collection("roomlist").document(roomId).get()
                 .addOnSuccessListener { roomDoc ->
                     val bookings = roomDoc.get("bookings") as? Map<String, Map<String, String>> ?: emptyMap()
-
-                    // Convert start and end times to Date objects for comparison
                     val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
                     val requestedStart = timeFormat.parse(startTime) ?: return@addOnSuccessListener
                     val requestedEnd = timeFormat.parse(endTime) ?: return@addOnSuccessListener
 
                     var isOverlapping = false
                     for (booking in bookings.values) {
+                        val bookedDate = booking["date"] ?: continue
+                        if (bookedDate != date) continue
+
                         val bookedStart = timeFormat.parse(booking["start_time"] ?: continue) ?: continue
                         val bookedEnd = timeFormat.parse(booking["end_time"] ?: continue) ?: continue
 
-                        // Check for overlap
-                        if ((requestedStart.before(bookedEnd) && requestedStart.after(bookedStart)) ||
-                            (requestedEnd.after(bookedStart) && requestedEnd.before(bookedEnd)) ||
-                            (requestedStart == bookedStart || requestedEnd == bookedEnd)) {
+                        if ((requestedStart.before(bookedEnd) && requestedEnd.after(bookedStart)) ||
+                            (requestedStart == bookedStart || requestedEnd == bookedEnd)
+                        ) {
                             isOverlapping = true
                             break
                         }
                     }
 
                     if (isOverlapping) {
-                        // Suggest next available time slot
-                        val suggestedStart = timeFormat.format(requestedEnd.time + 5 * 60 * 1000) // 5 mins after requested end
-                        val suggestedEnd = timeFormat.format(requestedEnd.time + (requestedEnd.time - requestedStart.time) + 5 * 60 * 1000)
-                        Toast.makeText(this, "Time slot unavailable. Try $suggestedStart to $suggestedEnd", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Time slot unavailable. Please choose another time.", Toast.LENGTH_LONG).show()
                     } else {
-                        // No overlap, proceed with booking
                         saveRoomBookingToFirestore(roomId, purpose, startTime, endTime, date)
                     }
                 }
@@ -169,24 +163,20 @@ class RoomActivity : AppCompatActivity() {
                         "date" to date,
                         "start_time" to startTime,
                         "end_time" to endTime,
-                        "purpose" to purpose
+                        "purpose" to purpose,
+                        "username" to (currentUser.displayName ?: "Anonymous")
                     )
 
                     val roomRef = db.collection("roomlist").document(roomId)
-                    roomRef.get().addOnSuccessListener { roomDoc ->
-                        val serial = (roomDoc.data?.size ?: 0) + 1
-                        roomRef.update("bookings.$serial", bookingData)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Room booked successfully!", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, BookedRoomActivity::class.java))
-                                finish()
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error booking room: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-                    }.addOnFailureListener { e ->
-                        Toast.makeText(this, "Error fetching room data: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+                    roomRef.update("bookings.${System.currentTimeMillis()}", bookingData)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Room booked successfully!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, BookedRoomActivity::class.java))
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error booking room: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error fetching user data: ${e.message}", Toast.LENGTH_SHORT).show()

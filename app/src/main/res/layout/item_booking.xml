@@ -4,34 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
-    android:background="@android:color/white"
-    android:layout_marginBottom="8dp"
-    android:elevation="4dp">
+    android:padding="12dp">
 
-    <!-- Room Number -->
+    <!-- Club Name -->
     <TextView
-        android:id="@+id/roomTextView"
+        android:id="@+id/clubName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Room Number"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginBottom="4dp" />
+        android:text="Club Name"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 
-    <!-- Time of Booking -->
+    <!-- Booking Date -->
     <TextView
-        android:id="@+id/timeTextView"
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray" />
+
+    <!-- Booking Time -->
+    <TextView
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"
-        android:layout_marginBottom="4dp" />
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray" />
 
-    <!-- Purpose of Booking -->
+    <!-- Booking Purpose -->
     <TextView
-        android:id="@+id/purposeTextView"
+        android:id="@+id/purpose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Purpose"
-        android:layout_marginBottom="4dp" />
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray" />
+
 </LinearLayout>

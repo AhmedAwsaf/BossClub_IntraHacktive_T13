@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Display the "booked" image at the top -->
-    <ImageView
-        android:id="@+id/bookedImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Booked Image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/booked" />
-
-    <!-- Room Details Text -->
-    <TextView
-        android:id="@+id/roomDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Room details will be displayed here"
-        android:textSize="18sp" />
-
-    <!-- Link to navigate to RoomActivity to book a new room -->
     <TextView
         android:id="@+id/bookLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:text="Book a new room"
+        android:textSize="18sp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="18sp" />
+        android:layout_marginBottom="16dp" />
+
+    <!-- Make sure this uses androidx.recyclerview.widget.RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookingsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 </LinearLayout>
