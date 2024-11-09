@@ -68,6 +68,16 @@
             android:exported="true"
             android:label="Budget Requests"/>
 
+        <activity
+            android:name=".EventActivity"
+            android:exported="true"
+            android:label="Shows Events"/>
+
+        <activity
+            android:name=".CreateEventActivity"
+            android:exported="true"
+            android:label="Creates Events"/>
+
 
 
     </application>

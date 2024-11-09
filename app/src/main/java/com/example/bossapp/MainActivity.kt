@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
             // TODO: Navigate to the Event activity
+            navigateToActivity(CreateEventActivity::class.java)
         }
 
         findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
