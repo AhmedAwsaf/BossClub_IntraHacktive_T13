@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,7 +36,7 @@
         android:layout_above="@id/messageInputContainer"
         android:layout_below="@id/toolbar"
         android:padding="8dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false" />
 
     <!-- Input Container -->
     <LinearLayout
@@ -58,7 +59,7 @@
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
             android:inputType="text"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical" />
 
         <!-- Send Button -->
         <ImageButton
@@ -68,7 +69,7 @@
             android:src="@drawable/ic_send"
             android:contentDescription="Send"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:tint="@color/teal_200"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            app:tint="@color/teal_200" />
     </LinearLayout>
 </RelativeLayout>
