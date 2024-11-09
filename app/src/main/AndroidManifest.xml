@@ -100,6 +100,23 @@
             android:exported="true"
             android:label="Does special features only for OCA"/>
 
+        <activity
+            android:name=".CreateSurveyActivity"
+            android:exported="true"
+            android:label="Survey"/>
+
+        <activity
+            android:name=".SurveyActivity"
+            android:exported="true"
+            android:label="Survey"/>
+
+        <activity
+            android:name=".SolveSurveyActivity"
+            android:exported="true"
+            android:label="Survey"/>
+
+
+
 
 
     </application>

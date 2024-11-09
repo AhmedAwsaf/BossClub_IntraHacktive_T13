@@ -11,6 +11,8 @@
     <string name="date_placeholder">Date: %1$s</string>
     <string name="time_placeholder">Time: %1$s - %2$s</string>
     <string name="purpose_placeholder">Purpose: %1$s</string>
+    <string name="submit_responses">Submit Responses</string>
+    <string name="submit_responses_description">Button to submit survey responses</string>
 
 
     <string name="client_id">1030636913218-us0bl3eoidsjgbp2dt0l23p8kigo3inj.apps.googleusercontent.com</string>

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_menu)
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth and Firestore
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
@@ -37,49 +37,63 @@ class MainActivity : AppCompatActivity() {
 
         // Setup button click listeners
         setupButtonListeners()
-
-
     }
 
     // Function to handle button navigation
     private fun setupButtonListeners() {
-        // Navigate to BookedRoomActivity
+        // Navigate to Booked Room Activity
         findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
             navigateToActivity(BookedRoomActivity::class.java)
         }
 
-        // Navigate to BudgetActivity
+        // Navigate to Budget Activity
         findViewById<ImageButton>(R.id.budgetButton).setOnClickListener {
             navigateToActivity(BudgetActivity::class.java)
+        }
+
+        // Special Panel Button for OCA users
+        findViewById<Button>(R.id.specialBtn).setOnClickListener {
+            navigateToActivity(SpecialActivity::class.java)
+        }
+
+        // Navigate to Event Creation
+        findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
+            navigateToActivity(CreateEventActivity::class.java)
+        }
+
+        // Navigate to Announcement Activity
+        findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
+            navigateToActivity(AnnouncementActivity::class.java)
+        }
+
+        // Navigate to Communication Activity
+        findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
+            navigateToActivity(CommunicationActivity::class.java)
+        }
+
+        // Survey Button with options to Create or Solve Survey
+        findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
+            showSurveyOptionsDialog()
         }
 
         // Sign Out Button with Confirmation
         findViewById<Button>(R.id.signoutBtn).setOnClickListener {
             showSignOutDialog()
         }
-        
-        // Special Button
-        val specialbtn = findViewById<Button>(R.id.specialBtn)
-        specialbtn.setOnClickListener {
-            navigateToActivity(SpecialActivity::class.java)
-        }
+    }
 
-        findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
-            // TODO: Navigate to the Event activity
-            navigateToActivity(CreateEventActivity::class.java)
-        }
-
-        findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
-            navigateToActivity(AnnouncementActivity::class.java)
-        }
-
-        findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
-            // TODO: Navigate to the Survey activity
-        }
-
-        findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
-            navigateToActivity(CommunicationActivity::class.java)
-        }
+    // Show dialog for Survey options
+    private fun showSurveyOptionsDialog() {
+        val options = arrayOf("Create Survey", "Solve Survey")
+        AlertDialog.Builder(this)
+            .setTitle("Select an Option")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> navigateToActivity(CreateSurveyActivity::class.java)
+                    1 -> navigateToActivity(SolveSurveyActivity::class.java)
+                }
+            }
+            .show()
     }
 
     // Generic function to navigate to a specified activity
@@ -109,6 +123,7 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    // Method to load user data and display it on the menu screen
     private fun loadUserData() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -119,19 +134,19 @@ class MainActivity : AppCompatActivity() {
                         val username = document.getString("username") ?: ""
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
-                        val user_type = document.getString("user_type") ?: ""
+                        val userType = document.getString("user_type") ?: ""
 
-                        // Display data on the menu screen
+                        // Display user information
                         findViewById<TextView>(R.id.userNameText).text = username
                         findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
 
-                        if (user_type == "oca") {
+                        // Show special panel button for OCA users
+                        if (userType == "oca") {
                             findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
                             findViewById<TextView>(R.id.clubNameText).text = "OCA"
                             findViewById<TextView>(R.id.club_deptText).text = "Admin"
                         }
-
                     } else {
                         Toast.makeText(this, "No user data found", Toast.LENGTH_SHORT).show()
                     }
