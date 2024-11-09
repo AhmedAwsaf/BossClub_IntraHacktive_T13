@@ -1,7 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Pending Event Approvals Section -->
+        <LinearLayout
+            android:id="@+id/pendingEventSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending Event Approvals"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/pendingEventContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Budget Requests Section -->
+        <LinearLayout
+            android:id="@+id/budgetRequestSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget Requests"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/budgetRequestContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Check Events Section -->
+        <LinearLayout
+            android:id="@+id/checkEventsSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check Events"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/checkEventsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

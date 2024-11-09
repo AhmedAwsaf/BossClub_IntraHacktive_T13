@@ -13,3 +13,4 @@ class SpecialActivity : AppCompatActivity() {
         setContentView(R.layout.special_panel)
     }
 }
+
