@@ -75,6 +75,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
-    implementation(libs.material3)
+    implementation(libs.androidx.cardview)
+    implementation(libs.firebase.firestore.ktx.v2441)
     implementation(libs.material)
 }
