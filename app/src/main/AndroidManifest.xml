@@ -85,6 +85,15 @@
             android:name=".CreateEventActivity"
             android:exported="true"
             android:label="Creates Events"/>
+        <activity
+            android:name=".CommunicationActivity"
+            android:exported="true"
+            android:label="Creates Events"/>
+        <activity
+            android:name=".MessageAdapter"
+            android:exported="true"
+            android:label="Creates Events"/>
+
 
         <activity
             android:name=".SpecialActivity"
