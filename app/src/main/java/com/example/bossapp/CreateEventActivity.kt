@@ -52,7 +52,7 @@ class CreateEventActivity : AppCompatActivity() {
                                 eventEndDate = eventEndDate,
                                 eventFeatures = eventFeatures,
                                 club = club,
-                                addedBy = userName
+                                addedBy = currentUser.uid
                             )
 
                             firestore.collection("events")
