@@ -77,7 +77,7 @@
             android:label="Announcement"/>
 
         <activity
-            android:name=".EventActivity"
+            android:name=".EventViewerActivity"
             android:exported="true"
             android:label="Shows Events"/>
 

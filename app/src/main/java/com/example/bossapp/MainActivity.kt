@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Fetch user data and display it
+        // Load and display user data
         loadUserData()
 
         // Check if the user is logged in, if not redirect to LoginActivity
@@ -41,42 +41,37 @@ class MainActivity : AppCompatActivity() {
 
     // Function to handle button navigation
     private fun setupButtonListeners() {
-        // Navigate to Booked Room Activity
+        // Navigate to different activities based on button clicks
         findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
             navigateToActivity(BookedRoomActivity::class.java)
         }
 
-        // Navigate to Budget Activity
         findViewById<ImageButton>(R.id.budgetButton).setOnClickListener {
             navigateToActivity(BudgetActivity::class.java)
         }
 
-        // Special Panel Button for OCA users
         findViewById<Button>(R.id.specialBtn).setOnClickListener {
             navigateToActivity(SpecialActivity::class.java)
         }
 
-        // Navigate to Event Creation
         findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
-            navigateToActivity(CreateEventActivity::class.java)
+            navigateToActivity(EventViewerActivity::class.java)
         }
 
-        // Navigate to Announcement Activity
         findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
             navigateToActivity(AnnouncementActivity::class.java)
         }
 
-        // Navigate to Communication Activity
         findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
             navigateToActivity(CommunicationActivity::class.java)
         }
 
-        // Survey Button with options to Create or Solve Survey
+        // Handle survey button click with options dialog
         findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
             showSurveyOptionsDialog()
         }
 
-        // Sign Out Button with Confirmation
+        // Sign out button with confirmation
         findViewById<Button>(R.id.signoutBtn).setOnClickListener {
             showSignOutDialog()
         }
