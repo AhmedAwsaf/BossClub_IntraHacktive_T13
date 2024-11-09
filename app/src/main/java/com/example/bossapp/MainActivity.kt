@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
-            // TODO: Navigate to the Communicate activity
+            navigateToActivity(CommunicationActivity::class.java)
         }
     }
 

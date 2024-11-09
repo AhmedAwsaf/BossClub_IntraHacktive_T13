@@ -78,4 +78,5 @@ dependencies {
     implementation(libs.androidx.cardview)
     implementation(libs.firebase.firestore.ktx.v2441)
     implementation(libs.material)
+    implementation(libs.material.v190)
 }
