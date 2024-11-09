@@ -34,6 +34,7 @@ class CommunicationActivity : AppCompatActivity() {
         messageInput = findViewById(R.id.messageInput)
         sendButton = findViewById(R.id.sendButton)
 
+        // Set up RecyclerView
         messageAdapter = MessageAdapter(messages)
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
@@ -41,10 +42,13 @@ class CommunicationActivity : AppCompatActivity() {
         // Fetch the current username from Firestore
         fetchCurrentUsername()
 
+        // Load existing messages from Firestore
+        loadMessages()
+
         sendButton.setOnClickListener {
             val messageText = messageInput.text.toString()
             if (messageText.isNotEmpty()) {
-                addMessage(currentUsername, messageText)
+                sendMessage(messageText)
                 messageInput.text.clear()
             }
         }
@@ -58,7 +62,6 @@ class CommunicationActivity : AppCompatActivity() {
             db.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
-                        // Fetch the username from Firestore
                         currentUsername = document.getString("username") ?: "Anonymous"
                     }
                 }
@@ -69,11 +72,38 @@ class CommunicationActivity : AppCompatActivity() {
         }
     }
 
-    // Function to add a message to the list and update the RecyclerView
-    private fun addMessage(username: String, text: String) {
-        val message = Message(text, username)
-        messages.add(message)
-        messageAdapter.notifyItemInserted(messages.size - 1)
-        messageRecyclerView.scrollToPosition(messages.size - 1)
+    // Send a message and store it in Firestore
+    private fun sendMessage(text: String) {
+        val message = Message(text, currentUsername)
+        db.collection("messages").add(message)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Message sent", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error sending message: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun loadMessages() {
+        db.collection("messages")
+            .orderBy("timestamp")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Toast.makeText(this, "Error loading messages: ${error.message}", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    messages.clear()
+                    for (document in snapshot.documents) {
+                        val text = document.getString("text") ?: ""
+                        val username = document.getString("username") ?: "Anonymous"
+                        val message = Message(text, username)
+                        messages.add(message)
+                    }
+                    messageAdapter.notifyDataSetChanged()
+                    messageRecyclerView.scrollToPosition(messages.size - 1)
+                }
+            }
     }
 }
