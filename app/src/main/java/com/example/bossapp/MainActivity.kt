@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
-            // TODO: Navigate to the Announcement activity
+            navigateToActivity(AnnouncementActivity::class.java)
         }
 
         findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {

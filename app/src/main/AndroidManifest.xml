@@ -67,6 +67,14 @@
             android:name=".BudgetActivity"
             android:exported="true"
             android:label="Budget Requests"/>
+        <activity
+            android:name=".AnnouncementActivity"
+            android:exported="true"
+            android:label="Announcements"/>
+        <activity
+            android:name=".CreateAnnouncementActivity"
+            android:exported="true"
+            android:label="Announcement"/>
 
 
 
