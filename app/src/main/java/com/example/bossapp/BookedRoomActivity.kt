@@ -28,6 +28,12 @@ class BookedRoomActivity : AppCompatActivity() {
         bookingsRecyclerView.layoutManager = LinearLayoutManager(this)
         bookingsRecyclerView.adapter = bookingAdapter
 
+        val booklink = findViewById<TextView>(R.id.bookLink)
+        booklink.setOnClickListener {
+            val intent = Intent(this, RoomActivity::class.java)
+            startActivity(intent)
+        }
+
         loadBookings()
     }
 
