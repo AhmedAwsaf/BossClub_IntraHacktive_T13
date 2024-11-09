@@ -1,9 +1,11 @@
+package com.example.bossapp
+
+import Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bossapp.R
 
 class MessageAdapter(private val messages: List<Message>) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {

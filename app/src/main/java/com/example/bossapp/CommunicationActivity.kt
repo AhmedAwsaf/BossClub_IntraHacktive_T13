@@ -1,7 +1,7 @@
 package com.example.bossapp
 
+
 import Message
-import MessageAdapter
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -45,6 +45,7 @@ class CommunicationActivity : AppCompatActivity() {
         // Load existing messages from Firestore
         loadMessages()
 
+        // Handle sending a message
         sendButton.setOnClickListener {
             val messageText = messageInput.text.toString()
             if (messageText.isNotEmpty()) {
@@ -57,24 +58,20 @@ class CommunicationActivity : AppCompatActivity() {
     // Fetch the current user's username from Firestore
     private fun fetchCurrentUsername() {
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val userId = user.uid
-            db.collection("users").document(userId).get()
+        user?.let {
+            db.collection("users").document(it.uid).get()
                 .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        currentUsername = document.getString("username") ?: "Anonymous"
-                    }
+                    currentUsername = document.getString("username") ?: "Anonymous"
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error fetching username: ${e.message}", Toast.LENGTH_SHORT).show()
-                    currentUsername = "Anonymous"
                 }
         }
     }
 
-    // Send a message and store it in Firestore
+    // Function to send a message
     private fun sendMessage(text: String) {
-        val message = Message(text, currentUsername)
+        val message = Message(text, currentUsername, System.currentTimeMillis())
         db.collection("messages").add(message)
             .addOnSuccessListener {
                 Toast.makeText(this, "Message sent", Toast.LENGTH_SHORT).show()
@@ -84,6 +81,7 @@ class CommunicationActivity : AppCompatActivity() {
             }
     }
 
+    // Load messages from Firestore in real-time
     private fun loadMessages() {
         db.collection("messages")
             .orderBy("timestamp")
@@ -98,7 +96,8 @@ class CommunicationActivity : AppCompatActivity() {
                     for (document in snapshot.documents) {
                         val text = document.getString("text") ?: ""
                         val username = document.getString("username") ?: "Anonymous"
-                        val message = Message(text, username)
+                        val timestamp = document.getLong("timestamp") ?: 0L
+                        val message = Message(text, username, timestamp)
                         messages.add(message)
                     }
                     messageAdapter.notifyDataSetChanged()
