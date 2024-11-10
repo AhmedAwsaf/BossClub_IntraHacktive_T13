@@ -18,9 +18,9 @@ class BookingAdapter(private val bookings: List<Booking>) :
     RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
     class BookingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val clubName: TextView = itemView.findViewById(R.id.clubName)
-        val date: TextView = itemView.findViewById(R.id.date)
-        val time: TextView = itemView.findViewById(R.id.time)
+        val clubName: TextView = itemView.findViewById(R.id.clubNameText)
+        val date: TextView = itemView.findViewById(R.id.dateText)
+        val time: TextView = itemView.findViewById(R.id.timeText)
         val purpose: TextView = itemView.findViewById(R.id.purpose)
     }
 
