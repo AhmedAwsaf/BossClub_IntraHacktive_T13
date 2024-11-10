@@ -63,19 +63,46 @@
     </LinearLayout>
 
     <GridLayout
+        android:id="@+id/Grid"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         android:alignmentMode="alignMargins"
-        android:columnCount="3"
+        android:columnCount="2"
         android:columnOrderPreserved="false">
 
+        <!-- Announcements Button with Label -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageButton
+                android:id="@+id/announcementButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Announcements"
+                android:scaleType="fitCenter"
+                android:src="@drawable/announcements" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Announcements"
+                android:textColor="@color/black"
+
+                android:textSize="16sp" />
+        </LinearLayout>
         <!-- Event Button with Label -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <ImageButton
@@ -90,45 +117,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Events"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Budget Button with Label -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="8dp"
-            tools:ignore="ExtraText">
-
-            <ImageButton
-                android:id="@+id/budgetButton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Budget"
-                android:scaleType="fitCenter"
-                android:src="@drawable/budget" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Budget Request"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:textColor="@color/black"/>
-        </LinearLayout>
 
         <!-- Room Booking Button with Label -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
 
             android:padding="8dp">
 
@@ -144,45 +145,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Room Booking"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Announcements Button with Label -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="8dp">
-
-            <ImageButton
-                android:id="@+id/announcementButton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Announcements"
-                android:scaleType="fitCenter"
-                android:src="@drawable/announcements" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Announcements"
-                android:textSize="16sp"
-                android:gravity="center"
-
-                android:textColor="@color/black"/>
-        </LinearLayout>
 
         <!-- Survey Button with Label -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <ImageButton
@@ -197,19 +172,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Survey"
-                android:textSize="16sp"
                 android:gravity="center"
-                android:textColor="@color/black"/>
+                android:text="Survey"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Communicate Button with Label -->
         <LinearLayout
+            android:id="@+id/commLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="8dp">
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:visibility="gone">
 
             <ImageButton
                 android:id="@+id/communicateButton"
@@ -223,10 +200,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Communicate"
-                android:textSize="16sp"
                 android:gravity="center"
-                android:textColor="@color/black"/>
+                android:text="Communicate"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Budget Button with Label -->
+        <LinearLayout
+            android:id="@+id/budgetLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:visibility="gone"
+            tools:ignore="ExtraText">
+
+            <ImageButton
+                android:id="@+id/budgetButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Budget"
+                android:scaleType="fitCenter"
+                android:src="@drawable/budget" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Budget Request"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </GridLayout>
@@ -235,7 +241,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_height="92dp"
         android:orientation="horizontal">
 
         <Button

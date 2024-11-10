@@ -3,16 +3,19 @@ package com.example.bossapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AnnouncementActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
     private lateinit var announcementsContainer: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +23,38 @@ class AnnouncementActivity : AppCompatActivity() {
         setContentView(R.layout.activity_annoucement)
 
         db = FirebaseFirestore.getInstance()
-        announcementsContainer = findViewById(R.id.announcementsContainer)
+        auth = FirebaseAuth.getInstance()
 
-        loadAnnouncements()
+        announcementsContainer = findViewById(R.id.announcementsContainer)
 
         findViewById<TextView>(R.id.createAnnouncementLink).setOnClickListener {
             startActivity(Intent(this, CreateAnnouncementActivity::class.java))
         }
+
+        loadAnnouncements()
+
+        showAnnounceButton()
+
+    }
+
+    private fun showAnnounceButton(){
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid ?: ""
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
+                    if(clr_level <= 1) {
+                        findViewById<TextView>(R.id.createAnnouncementLink).visibility = View.GONE
+                    } else {
+                        findViewById<TextView>(R.id.createAnnouncementLink).visibility = View.VISIBLE
+                    }
+                }
+                else {
+                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                }
+            }
+
     }
 
     private fun loadAnnouncements() {
