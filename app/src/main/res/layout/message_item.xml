@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/teal_200">
+        app:cardBackgroundColor="@color/purple_700">
 
         <LinearLayout
             android:layout_width="match_parent"
