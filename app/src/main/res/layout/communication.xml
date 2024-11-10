@@ -28,7 +28,7 @@
             android:layout_gravity="center" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Message List -->
+    <!-- RecyclerView for displaying messages -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:padding="8dp"
         android:clipToPadding="false" />
 
-    <!-- Input Container -->
+    <!-- Input Container for typing messages -->
     <LinearLayout
         android:id="@+id/messageInputContainer"
         android:layout_width="match_parent"
@@ -49,27 +49,32 @@
         android:background="@color/gray_light"
         android:elevation="4dp">
 
-        <!-- Text Input for Typing Messages -->
+        <!-- Text Input for typing messages -->
         <EditText
             android:id="@+id/messageInput"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="Type a message..."
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
             android:inputType="text"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray" />
 
         <!-- Send Button -->
         <ImageButton
             android:id="@+id/sendButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_send"
             android:contentDescription="Send"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:layout_marginStart="8dp"
-            app:tint="@color/teal_200" />
+            app:tint="@color/black"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:padding="8dp" />
     </LinearLayout>
 </RelativeLayout>
