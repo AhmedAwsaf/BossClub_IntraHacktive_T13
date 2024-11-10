@@ -72,7 +72,22 @@ class MainActivity : AppCompatActivity() {
 
         // Handle survey button click with options dialog
         findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
-            showSurveyOptionsDialog()
+            val currentUser = auth.currentUser
+            val userId = currentUser?.uid ?: ""
+            db.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
+                        if(clr_level <= 1) {
+                            navigateToActivity(SurveyActivity::class.java)
+                        } else {
+                            showSurveyOptionsDialog()
+                        }
+                    }
+                    else {
+                        Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
         // Sign out button with confirmation
