@@ -3,14 +3,18 @@ package com.example.bossapp
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
@@ -130,6 +134,15 @@ class MainActivity : AppCompatActivity() {
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
                         val userType = document.getString("user_type") ?: ""
+                        val clr_level = document.getLong("clr_level")?.toInt() ?: 1
+                        if(clr_level <= 1) {
+                            Log.d("MainActivity", "clr_level: $clr_level")
+                            findViewById<LinearLayout>(R.id.budgetLayout).visibility = View.GONE
+                            findViewById<LinearLayout>(R.id.commLayout).visibility = View.GONE
+                        } else {
+                            findViewById<LinearLayout>(R.id.budgetLayout).visibility = View.VISIBLE
+                            findViewById<LinearLayout>(R.id.commLayout).visibility = View.VISIBLE
+                        }
 
                         // Display user information
                         findViewById<TextView>(R.id.userNameText).text = username
