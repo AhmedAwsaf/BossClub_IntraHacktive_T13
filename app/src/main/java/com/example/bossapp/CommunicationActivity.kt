@@ -84,7 +84,7 @@ class CommunicationActivity : AppCompatActivity() {
     // Load messages from Firestore in real-time
     private fun loadMessages() {
         db.collection("messages")
-            .orderBy("timestamp")
+            .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Toast.makeText(this, "Error loading messages: ${error.message}", Toast.LENGTH_SHORT).show()
@@ -97,12 +97,20 @@ class CommunicationActivity : AppCompatActivity() {
                         val text = document.getString("text") ?: ""
                         val username = document.getString("username") ?: "Anonymous"
                         val timestamp = document.getLong("timestamp") ?: 0L
-                        val message = Message(text, username, timestamp)
-                        messages.add(message)
+
+                        // Check if timestamp is valid
+                        if (timestamp != 0L) {
+                            val message = Message(text, username, timestamp)
+                            messages.add(message)
+                        }
                     }
+                    // Sort messages manually as a safeguard
+                    messages.sortBy { it.timestamp }
+
                     messageAdapter.notifyDataSetChanged()
                     messageRecyclerView.scrollToPosition(messages.size - 1)
                 }
             }
     }
+
 }
