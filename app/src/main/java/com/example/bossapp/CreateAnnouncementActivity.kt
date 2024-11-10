@@ -1,5 +1,6 @@
 package com.example.bossapp
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,46 +25,51 @@ class CreateAnnouncementActivity : AppCompatActivity() {
 
         val typeEditText = findViewById<EditText>(R.id.typeEditText)
         val titleEditText = findViewById<EditText>(R.id.titleEditText)
-        val clubEditText = findViewById<EditText>(R.id.clubNameEditText)
+        val clubNameEditText = findViewById<EditText>(R.id.clubNameEditText)
         val detailsEditText = findViewById<EditText>(R.id.detailsEditText)
         val deadlineDateEditText = findViewById<EditText>(R.id.deadlineDateEditText)
         val submitButton = findViewById<Button>(R.id.submitAnnouncementButton)
 
+        // Handle date picker
+        deadlineDateEditText.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val datePicker = DatePickerDialog(this, { _, year, month, day ->
+                val formattedDate = "$year-${month + 1}-$day"
+                deadlineDateEditText.setText(formattedDate)
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            datePicker.show()
+        }
+
+        // Handle form submission
         submitButton.setOnClickListener {
             val type = typeEditText.text.toString()
             val title = titleEditText.text.toString()
-            val club = clubEditText.text.toString()
+            val clubName = clubNameEditText.text.toString()
             val details = detailsEditText.text.toString()
             val deadlineDate = deadlineDateEditText.text.toString()
-            val currentUser = auth.currentUser
+            val username = auth.currentUser?.displayName ?: "Anonymous"
 
-            if (currentUser != null) {
-                // Fetch the username of the logged-in user
-                db.collection("users").document(currentUser.uid).get()
-                    .addOnSuccessListener { document ->
-                        val username = document.getString("username") ?: "Anonymous"
+            if (type.isNotEmpty() && title.isNotEmpty() && clubName.isNotEmpty() && details.isNotEmpty() && deadlineDate.isNotEmpty()) {
+                val announcement = mapOf(
+                    "type" to type,
+                    "title" to title,
+                    "clubName" to clubName,
+                    "details" to details,
+                    "deadlineDate" to deadlineDate,
+                    "username" to username,
+                    "postDate" to SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                )
 
-                        val postDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-
-                        val announcementData = mapOf(
-                            "type" to type,
-                            "title" to title,
-                            "club" to club,
-                            "details" to details,
-                            "postDate" to postDate,
-                            "deadlineDate" to deadlineDate,
-                            "postedBy" to username // Save the username here
-                        )
-
-                        db.collection("announcements").add(announcementData)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Announcement created successfully", Toast.LENGTH_SHORT).show()
-                                finish()
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
+                db.collection("announcements").add(announcement)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Announcement created!", Toast.LENGTH_SHORT).show()
+                        finish()
                     }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to create announcement: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
     }
