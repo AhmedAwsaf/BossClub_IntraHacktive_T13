@@ -143,6 +143,8 @@ class MainActivity : AppCompatActivity() {
                     if (document != null && document.exists()) {
                         val username = document.getString("username") ?: ""
                         val club = document.getString("club") ?: ""
+                        val club_role = document.getString("club_role") ?: ""
+                        val club_dept = document.getString("club_dept") ?: ""
                         val department = document.getString("department") ?: ""
                         val userType = document.getString("user_type") ?: ""
                         val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
@@ -171,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
                         // Display user information
                         findViewById<TextView>(R.id.userNameText).text = username
-                        findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
+                        findViewById<TextView>(R.id.clubNameText).text = "$club $club_dept - $club_role "
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
 
                         // Show special panel button for OCA users

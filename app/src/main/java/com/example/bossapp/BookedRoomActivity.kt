@@ -33,7 +33,7 @@ class BookedRoomActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         )
-
+        showBookButton()
         // Load bookings from Firestore
         loadBookings()
     }
