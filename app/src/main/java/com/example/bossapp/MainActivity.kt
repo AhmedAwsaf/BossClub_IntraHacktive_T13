@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> navigateToActivity(CreateSurveyActivity::class.java)
-                    1 -> navigateToActivity(SolveSurveyActivity::class.java)
+                    1 -> navigateToActivity(SurveyActivity::class.java)
                 }
             }
             .show()

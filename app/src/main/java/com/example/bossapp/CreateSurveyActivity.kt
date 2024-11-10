@@ -1,16 +1,16 @@
 package com.example.bossapp
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CreateSurveyActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     private lateinit var questionsLayout: LinearLayout
     private lateinit var surveyTitleEditText: EditText
 
@@ -39,27 +39,65 @@ class CreateSurveyActivity : AppCompatActivity() {
     }
 
     private fun addQuestionField() {
+        // Create a layout to hold the question field and the type spinner
+        val questionLayout = LinearLayout(this)
+        questionLayout.orientation = LinearLayout.HORIZONTAL
+        questionLayout.layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        // Create the question EditText
         val questionEditText = EditText(this)
         questionEditText.hint = "Enter Question"
         questionEditText.textSize = 16f
-        questionsLayout.addView(questionEditText)
+        questionEditText.layoutParams = LinearLayout.LayoutParams(
+            0,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            1f
+        )
+
+        // Create the question type spinner
+        val typeSpinner = Spinner(this)
+        val types = arrayOf("Sentence", "True/False", "Out of 5")
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, types)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        typeSpinner.adapter = spinnerAdapter
+
+        // Add question EditText and type spinner to the question layout
+        questionLayout.addView(questionEditText)
+        questionLayout.addView(typeSpinner)
+
+        // Add the question layout to the main questions layout
+        questionsLayout.addView(questionLayout)
     }
 
-    private fun getQuestions(): List<String> {
-        val questions = mutableListOf<String>()
+    private fun getQuestions(): List<Map<String, String>> {
+        val questions = mutableListOf<Map<String, String>>()
         for (i in 0 until questionsLayout.childCount) {
-            val questionField = questionsLayout.getChildAt(i) as EditText
-            val question = questionField.text.toString()
-            if (question.isNotEmpty()) {
-                questions.add(question)
+            val questionLayout = questionsLayout.getChildAt(i) as LinearLayout
+            val questionField = questionLayout.getChildAt(0) as EditText
+            val typeSpinner = questionLayout.getChildAt(1) as Spinner
+
+            val questionText = questionField.text.toString()
+            val questionType = typeSpinner.selectedItem.toString()
+
+            if (questionText.isNotEmpty()) {
+                questions.add(
+                    mapOf(
+                        "question" to questionText,
+                        "type" to questionType
+                    )
+                )
             }
         }
         return questions
     }
 
-    private fun saveSurveyToFirestore(title: String, questions: List<String>) {
+    private fun saveSurveyToFirestore(title: String, questions: List<Map<String, String>>) {
         val surveyData = hashMapOf(
             "title" to title,
+            "createdBy" to auth.currentUser?.uid,
             "questions" to questions
         )
 

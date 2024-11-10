@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,6 +21,7 @@ class CreateEventActivity : AppCompatActivity() {
     private lateinit var createEventButton: Button
 
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,22 +75,47 @@ class CreateEventActivity : AppCompatActivity() {
             return
         }
 
-        val event = Event(
-            eventName = eventName,
-            eventDescription = eventDescription,
-            eventStartDate = eventStartDate,
-            eventEndDate = eventEndDate,
-            eventFeatures = eventFeatures
-        )
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // Save event to Firestore
-        db.collection("events").add(event)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Event created successfully!", Toast.LENGTH_SHORT).show()
-                finish()
+        db.collection("users").document(currentUser.uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Retrieve username and club from the user document
+                    val username = document.getString("username") ?: ""
+                    val club = document.getString("club") ?: ""
+
+
+                    // Create event object with additional fields
+                    val event = Event(
+                        eventName = eventName,
+                        eventDescription = eventDescription,
+                        eventStartDate = eventStartDate,
+                        eventEndDate = eventEndDate,
+                        eventFeatures = eventFeatures,
+                        addedBy = username.toString(),  // Store the username
+                        club = club.toString()          // Store the club
+                    )
+
+                    // Save event to Firestore
+                    db.collection("events").add(event)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Event created successfully!", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error creating event: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(this, "User document does not exist", Toast.LENGTH_SHORT).show()
+                }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error creating event: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error fetching user document: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+
     }
 }

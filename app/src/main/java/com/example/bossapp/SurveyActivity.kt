@@ -15,6 +15,7 @@ class SurveyActivity : AppCompatActivity() {
     private lateinit var surveyListLayout: LinearLayout
     private val db = FirebaseFirestore.getInstance()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
@@ -38,6 +39,8 @@ class SurveyActivity : AppCompatActivity() {
                         text = surveyTitle
                         textSize = 18f
                         setOnClickListener { navigateToSolveSurvey(surveyId) }
+                        setPadding(16, 16, 16, 16)
+                        setBackgroundResource(R.drawable.card_border)
                     }
                     surveyListLayout.addView(surveyLink)
                 }

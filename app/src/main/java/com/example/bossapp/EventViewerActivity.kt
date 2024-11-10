@@ -1,8 +1,10 @@
 package com.example.bossapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -48,6 +50,10 @@ class EventViewerActivity : AppCompatActivity() {
                 // Clear the existing layout
                 eventsLayout.removeAllViews()
 
+                val upcomingEvents = mutableListOf<View>()
+                val pastEvents = mutableListOf<View>()
+                val currentDate = Date() // Current date to compare with event end dates
+
                 // Display each event
                 for (document in documents) {
                     val eventName = document.getString("eventName") ?: ""
@@ -55,18 +61,35 @@ class EventViewerActivity : AppCompatActivity() {
                     val eventStartDate = document.getString("eventStartDate") ?: ""
                     val eventEndDate = document.getString("eventEndDate") ?: ""
                     val eventFeatures = document.get("eventFeatures") as? List<String> ?: emptyList()
+                    val status = document.getString("status") ?: ""
 
                     // Create a view for each event
-                    val eventView = createEventView(eventName, eventDescription, eventStartDate, eventEndDate, eventFeatures)
-                    eventsLayout.addView(eventView)
+                    val eventView = createEventView(eventName, eventDescription, eventStartDate, eventEndDate, eventFeatures, status)
 
-                    // Add some spacing between events
-                    val spacer = View(this)
-                    spacer.layoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        16
-                    )
-                    eventsLayout.addView(spacer)
+                    // Determine if the event has passed or is upcoming
+                    val endDate = dateFormat.parse(eventEndDate)
+                    if (endDate != null && endDate.before(currentDate)) {
+                        // If the event has already ended, add it to past events list
+                        pastEvents.add(eventView)
+                    } else {
+                        // If the event is upcoming or ongoing, add it to upcoming events list
+                        upcomingEvents.add(eventView)
+                    }
+                }
+
+                // Add upcoming events to the layout first
+                for (eventView in upcomingEvents) {
+                    eventsLayout.addView(eventView)
+                    addSpacer()
+                }
+
+                val event_spacer = layoutInflater.inflate(R.layout.event_spacer, null)
+                eventsLayout.addView(event_spacer)
+
+                // Add past events to the layout after upcoming events
+                for (eventView in pastEvents) {
+                    eventsLayout.addView(eventView)
+                    addSpacer()
                 }
             }
             .addOnFailureListener { e ->
@@ -74,12 +97,26 @@ class EventViewerActivity : AppCompatActivity() {
             }
     }
 
+    // Helper function to add spacing between events
+    private fun addSpacer() {
+        val spacer = View(this)
+        spacer.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            16
+        )
+
+
+        eventsLayout.addView(spacer)
+    }
+
+    @SuppressLint("MissingInflatedId")
     private fun createEventView(
         eventName: String,
         eventDescription: String,
         eventStartDate: String,
         eventEndDate: String,
-        eventFeatures: List<String>
+        eventFeatures: List<String>,
+        status : String
     ): View {
         val eventView = layoutInflater.inflate(R.layout.item_event, null)
 
@@ -87,11 +124,30 @@ class EventViewerActivity : AppCompatActivity() {
         val eventDescriptionTextView = eventView.findViewById<TextView>(R.id.eventDescription)
         val eventDatesTextView = eventView.findViewById<TextView>(R.id.eventDates)
         val eventFeaturesTextView = eventView.findViewById<TextView>(R.id.eventFeatures)
+        val statusTextView = eventView.findViewById<TextView>(R.id.status)
+        val statusImageView = eventView.findViewById<ImageView>(R.id.statusImageView)
+        val statusApprovedImageView = eventView.findViewById<ImageView>(R.id.statusApprovedImageView)
 
         eventNameTextView.text = eventName
         eventDescriptionTextView.text = eventDescription
         eventDatesTextView.text = "From: $eventStartDate To: $eventEndDate"
         eventFeaturesTextView.text = "Features: ${eventFeatures.joinToString(", ")}"
+
+
+        if (status == "approved"){
+            statusImageView.visibility = View.GONE
+            statusApprovedImageView.visibility = View.VISIBLE
+            statusTextView.text = "Approved Event"
+        } else if (status == "rejected"){
+            statusImageView.visibility = View.GONE
+            statusApprovedImageView.visibility = View.GONE
+            statusTextView.text = "Rejected Event"
+        }
+        else{
+            statusImageView.visibility = View.VISIBLE
+            statusApprovedImageView.visibility = View.GONE
+            statusTextView.text = "Waiting for Approval"
+        }
 
         return eventView
     }
