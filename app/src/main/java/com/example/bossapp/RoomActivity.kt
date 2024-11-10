@@ -162,6 +162,7 @@ class RoomActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     val club = document.getString("club") ?: "No Club"
                     val bookingData = mapOf(
+                        "document_id" to roomId,
                         "club_name" to club,
                         "date" to date,
                         "start_time" to startTime,
