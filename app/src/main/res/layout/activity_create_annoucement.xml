@@ -43,12 +43,12 @@
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Department Input Field -->
+        <!-- Club Name Input Field -->
         <EditText
-            android:id="@+id/departmentEditText"
+            android:id="@+id/clubNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Department"
+            android:hint="Club Name"
             android:padding="12dp"
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="16dp"/>
@@ -73,6 +73,18 @@
             android:padding="12dp"
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="16dp"/>
+
+        <!-- Username Display -->
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="by *username*"
+            android:textColor="@android:color/darker_gray"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:gravity="end"
+            android:textSize="14sp"/>
 
         <!-- Submit Button -->
         <Button
