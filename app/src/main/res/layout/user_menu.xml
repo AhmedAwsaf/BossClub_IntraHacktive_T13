@@ -187,8 +187,8 @@
 
             <ImageButton
                 android:id="@+id/surveyButton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="86dp"
+                android:layout_height="95dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="Survey"
                 android:scaleType="fitCenter"

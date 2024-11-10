@@ -9,8 +9,8 @@
 
     <!-- Logo for the Splash Screen -->
     <ImageView
-        android:layout_width="294dp"
-        android:layout_height="365dp"
+        android:layout_width="360dp"
+        android:layout_height="451dp"
         android:contentDescription="App Logo"
         android:src="@drawable/boss"
         tools:ignore="HardcodedText" />
