@@ -89,10 +89,10 @@
             android:name=".CommunicationActivity"
             android:exported="true"
             android:label="Creates Events"/>
-        <activity
-            android:name=".MessageAdapter"
-            android:exported="true"
-            android:label="Creates Events"/>
+    <!--<activity-->
+    <!--    android:name=".MessageAdapter"-->
+    <!--    android:exported="true"-->
+    <!--    android:label="Creates Events"/>-->
 
 
         <activity
@@ -125,8 +125,10 @@
             android:exported="true"
             android:label="Manage all rooms"/>
 
-
-
+        <activity
+            android:name=".BudgetStatusActivity"
+            android:exported="true"
+            android:label="Shows the status of the budget Request"/>
 
 
     </application>

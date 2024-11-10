@@ -78,5 +78,11 @@
             android:layout_height="wrap_content"
             android:text="Submit Request"
             android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/budgetStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status of Budget Requests" />
     </LinearLayout>
 </ScrollView>

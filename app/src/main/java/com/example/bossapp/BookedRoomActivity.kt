@@ -1,5 +1,6 @@
 package com.example.bossapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,6 +19,15 @@ class BookedRoomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.booked_room)
+
+        val newbook = findViewById<TextView>(R.id.bookLink)
+
+        newbook.setOnClickListener(
+            {
+                val intent = Intent(this, RoomActivity::class.java)
+                startActivity(intent)
+            }
+        )
 
         // Load bookings from Firestore
         loadBookings()
