@@ -43,6 +43,15 @@
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="16dp"/>
 
+        <EditText
+            android:id="@+id/departmentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Department"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="16dp"/>
+
         <!-- Club Name Input Field -->
         <EditText
             android:id="@+id/clubNameEditText"
