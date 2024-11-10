@@ -20,7 +20,7 @@ class SolveSurveyActivity : AppCompatActivity() {
 
         db = Firebase.firestore
 
-        // Retrieve the survey ID from the intent and check if it's null
+
         surveyId = intent.getStringExtra("surveyId") ?: ""
         if (surveyId.isEmpty()) {
             Toast.makeText(this, "Survey ID not found", Toast.LENGTH_SHORT).show()
@@ -28,14 +28,14 @@ class SolveSurveyActivity : AppCompatActivity() {
             return
         }
 
-        // Initialize views
+
         responseLayout = findViewById(R.id.responseLayout)
         submitResponsesButton = findViewById(R.id.submitResponsesButton)
 
-        // Load the survey questions
+
         loadSurveyQuestions()
 
-        // Set up button click listener
+
         submitResponsesButton.setOnClickListener {
             submitSurveyResponses()
         }
@@ -50,7 +50,7 @@ class SolveSurveyActivity : AppCompatActivity() {
 
                     findViewById<TextView>(R.id.surveyTitleTextView).text = title
 
-                    // Dynamically generate question fields based on type
+
                     for (questionData in questions) {
                         val questionText = questionData["question"] ?: "Untitled Question"
                         val questionType = questionData["type"] ?: "Sentence"
@@ -102,7 +102,7 @@ class SolveSurveyActivity : AppCompatActivity() {
                 responseLayout.addView(ratingBar)
             }
             else -> {
-                // Default to sentence type if the type is unrecognized
+
                 val answerEditText = EditText(this).apply {
                     hint = "Enter your answer"
                 }
@@ -115,7 +115,7 @@ class SolveSurveyActivity : AppCompatActivity() {
         val responses = mutableListOf<Map<String, Any>>()
         var questionIndex = 0
 
-        // Iterate through responseLayout children to collect answers
+
         for (i in 0 until responseLayout.childCount) {
             val view = responseLayout.getChildAt(i)
             val responseMap = mutableMapOf<String, Any>()
@@ -138,7 +138,7 @@ class SolveSurveyActivity : AppCompatActivity() {
             questionIndex++
         }
 
-        // Save responses to Firestore
+
         val responseMap = mapOf(
             "surveyId" to surveyId,
             "responses" to responses

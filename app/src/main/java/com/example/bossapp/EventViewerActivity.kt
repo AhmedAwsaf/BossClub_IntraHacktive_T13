@@ -33,10 +33,10 @@ class EventViewerActivity : AppCompatActivity() {
 
         showEventButton()
 
-        // Load events sorted by eventStartDate in ascending order
+
         loadEvents()
 
-        // Hyperlink to create a new event
+
         findViewById<TextView>(R.id.createEventLink).setOnClickListener {
             startActivity(Intent(this, CreateEventActivity::class.java))
         }
@@ -72,14 +72,14 @@ class EventViewerActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                // Clear the existing layout
+
                 eventsLayout.removeAllViews()
 
                 val upcomingEvents = mutableListOf<View>()
                 val pastEvents = mutableListOf<View>()
-                val currentDate = Date() // Current date to compare with event end dates
+                val currentDate = Date()
 
-                // Display each event
+
                 for (document in documents) {
                     val eventName = document.getString("eventName") ?: ""
                     val eventDescription = document.getString("eventDescription") ?: ""
@@ -88,21 +88,21 @@ class EventViewerActivity : AppCompatActivity() {
                     val eventFeatures = document.get("eventFeatures") as? List<String> ?: emptyList()
                     val status = document.getString("status") ?: ""
 
-                    // Create a view for each event
+
                     val eventView = createEventView(eventName, eventDescription, eventStartDate, eventEndDate, eventFeatures, status)
 
-                    // Determine if the event has passed or is upcoming
+
                     val endDate = dateFormat.parse(eventEndDate)
                     if (endDate != null && endDate.before(currentDate)) {
-                        // If the event has already ended, add it to past events list
+
                         pastEvents.add(eventView)
                     } else {
-                        // If the event is upcoming or ongoing, add it to upcoming events list
+
                         upcomingEvents.add(eventView)
                     }
                 }
 
-                // Add upcoming events to the layout first
+
                 for (eventView in upcomingEvents) {
                     eventsLayout.addView(eventView)
                     addSpacer()
@@ -111,7 +111,7 @@ class EventViewerActivity : AppCompatActivity() {
                 val event_spacer = layoutInflater.inflate(R.layout.event_spacer, null)
                 eventsLayout.addView(event_spacer)
 
-                // Add past events to the layout after upcoming events
+
                 for (eventView in pastEvents) {
                     eventsLayout.addView(eventView)
                     addSpacer()
@@ -122,7 +122,7 @@ class EventViewerActivity : AppCompatActivity() {
             }
     }
 
-    // Helper function to add spacing between events
+
     private fun addSpacer() {
         val spacer = View(this)
         spacer.layoutParams = LinearLayout.LayoutParams(

@@ -52,12 +52,12 @@ class OverviewActivity : AppCompatActivity() {
         val dataTypes = listOf("Users", "Events", "Budget Requests", "Room Bookings")
 
 
-        // Set up spinner with options
+
         val adapter = ArrayAdapter(this, R.layout.spinner_item, dataTypes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         dataTypeSpinner.adapter = adapter
 
-        // Fetch data when a new option is selected
+
         dataTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 linearLayoutContainer.removeAllViews() // Clear previous views
@@ -72,8 +72,7 @@ class OverviewActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Initially fetch the first category data (Users)
-        // fetchUsers()
+
     }
 
 
@@ -146,7 +145,7 @@ class OverviewActivity : AppCompatActivity() {
             textSize = 18f
             setPadding(16, 16, 16, 8)
 
-            // Set layout parameters with top and bottom margins for roomTextView
+
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -171,7 +170,7 @@ class OverviewActivity : AppCompatActivity() {
                 setPadding(32, 8, 16, 8)
                 setBackgroundResource(R.drawable.card_border)
 
-                // Set layout parameters with top and bottom margins for bookingTextView
+
                 layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
@@ -225,7 +224,7 @@ class OverviewActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setOnClickListener {
-                // Show the edit dialog for User
+
                 showEditDialog(dataType = "User", documentId = documentId, dataObject = user, name = user.username)
             }
         }
@@ -246,7 +245,7 @@ class OverviewActivity : AppCompatActivity() {
             cardElevation = 8f
             setBackgroundResource(R.drawable.card_border)
 
-            // Set layout parameters with top and bottom margins
+
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -268,7 +267,7 @@ class OverviewActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setOnClickListener {
-                // Show the edit dialog for User
+
                 showEditDialog(dataType = "Event", documentId = documentId, dataObject = event, name = event.eventName)
             }
         }
@@ -288,7 +287,7 @@ class OverviewActivity : AppCompatActivity() {
             cardElevation = 8f
             setBackgroundResource(R.drawable.card_border)
 
-            // Set layout parameters with top and bottom margins
+
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -312,7 +311,7 @@ class OverviewActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setOnClickListener {
-                // Show the edit dialog for User
+
                 showEditDialog(dataType = "Budget Request", documentId = documentId, dataObject = budgetRequest, name = budgetRequest.reason)
             }
         }
@@ -382,16 +381,11 @@ class OverviewActivity : AppCompatActivity() {
         val linearLayout = dialogView.findViewById<LinearLayout>(R.id.edit_linear_layout)
         val editTexts = mutableMapOf<String, EditText>()
 
-        // Populate the fields based on data type
+
         when (dataType) {
             "User" -> {
                 val user = dataObject as User
-                //editTexts["username"] = createEditText("Username", user.username, linearLayout)
-                //editTexts["phoneNumber"] = createEditText("Phone Number", user.phoneNumber, linearLayout)
-                //editTexts["semester"] = createEditText("Semester", user.semester, linearLayout)
-                //editTexts["department"] = createEditText("Department", user.department, linearLayout)
                 editTexts["club"] = createEditText("Club", user.club, linearLayout)
-                //editTexts["profilePictureUrl"] = createEditText("Profile Picture URL", user.profilePictureUrl, linearLayout)
                 editTexts["user_type"] = createEditText("User Type", user.user_type, linearLayout)
                 editTexts["club_role"] = createEditText("Club Role", user.club_role, linearLayout)
                 editTexts["club_clr_level"] = createEditText("Club Color Level", user.club_clr_level.toString(), linearLayout)
@@ -399,21 +393,20 @@ class OverviewActivity : AppCompatActivity() {
             }
             "Event" -> {
                 val event = dataObject as Event
-                //editTexts["eventName"] = createEditText("Event Name", event.eventName, linearLayout)
+
                 editTexts["eventDescription"] = createEditText("Event Description", event.eventDescription, linearLayout)
                 editTexts["eventStartDate"] = createEditText("Event Start Date", event.eventStartDate.toString(), linearLayout)
                 editTexts["eventEndDate"] = createEditText("Event End Date", event.eventEndDate.toString(), linearLayout)
-                //editTexts["club"] = createEditText("Club", event.club, linearLayout)
+
             }
             "Budget Request" -> {
                 val budgetRequest = dataObject as BudgetRequest
                 editTexts["value"] = createEditText("Budget Value", budgetRequest.value.toString(), linearLayout)
-                //editTexts["reason"] = createEditText("Reason", budgetRequest.reason, linearLayout)
                 editTexts["description"] = createEditText("Description", budgetRequest.description, linearLayout)
                 editTexts["spendAmount"] = createEditText("Spend Amount", budgetRequest.spendAmount.toString(), linearLayout)
                 editTexts["eventName"] = createEditText("Event Name", budgetRequest.eventName, linearLayout)
             }
-            // Add other cases if needed
+
         }
 
         AlertDialog.Builder(this).apply {
@@ -428,7 +421,7 @@ class OverviewActivity : AppCompatActivity() {
         }.create().show()
     }
 
-    // Helper function to create EditText with pre-populated text
+
     private fun createEditText(hint: String, preFill: String, parent: LinearLayout): EditText {
         val editText = EditText(this)
         editText.hint = hint
@@ -442,7 +435,7 @@ class OverviewActivity : AppCompatActivity() {
     }
 
 
-    // Create a CalendarView for date selection
+
     private fun createCalendarView(label: String, parent: LinearLayout): CalendarView {
         val calendarView = CalendarView(this).apply {
             setOnDateChangeListener { _, year, month, day ->
@@ -454,16 +447,16 @@ class OverviewActivity : AppCompatActivity() {
         return calendarView
     }
 
-    // Retrieve updated values from input fields
+
     private fun getUpdatedValues(editTexts: Map<String, View>, dataType: String): Map<String, Any> {
         val values = mutableMapOf<String, Any>()
 
         for ((key, view) in editTexts) {
             when (view) {
                 is EditText -> {
-                    // Check if the field is numeric to handle club_clr_level properly
+
                     values[key] = if (key == "club_clr_level") {
-                        view.text.toString().toIntOrNull() ?: 0 // Use 0 or handle error as needed
+                        view.text.toString().toIntOrNull() ?: 0
                     } else {
                         view.text.toString()
                     }
@@ -475,7 +468,7 @@ class OverviewActivity : AppCompatActivity() {
     }
 
 
-    // Update Firestore data based on collection
+
     private fun updateFirestoreData(dataType: String, documentId: String, updatedValues: Map<String, Any>) {
         val collectionName = when (dataType) {
             "User" -> "users"

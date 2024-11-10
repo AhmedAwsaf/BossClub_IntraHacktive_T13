@@ -34,7 +34,7 @@ class BookedRoomActivity : AppCompatActivity() {
             }
         )
 
-        // Load bookings from Firestore
+
         loadBookings()
     }
 
@@ -61,7 +61,7 @@ class BookedRoomActivity : AppCompatActivity() {
         val bookingsLayout = findViewById<LinearLayout>(R.id.eventsLayout)
         bookingsLayout.removeAllViews()
 
-        // Fetch all documents from "roomlist" collection
+
         db.collection("roomlist").get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val roomId = document.id
@@ -74,7 +74,7 @@ class BookedRoomActivity : AppCompatActivity() {
                     val endTime = booking["end_time"] ?: "N/A"
                     val purpose = booking["purpose"] ?: "N/A"
 
-                    // Inflate and populate each booking item
+
                     val bookingView = LayoutInflater.from(this).inflate(R.layout.item_booking, bookingsLayout, false)
 
                     val roomIdText = bookingView.findViewById<TextView>(R.id.roomIdText)
@@ -83,14 +83,14 @@ class BookedRoomActivity : AppCompatActivity() {
                     val timeText = bookingView.findViewById<TextView>(R.id.timeText)
                     val purposeText = bookingView.findViewById<TextView>(R.id.purposeText)
 
-                    // Set the data to the views
+
                     roomIdText.text = "Room ID: $roomId"
                     clubNameText.text = "Club: $clubName"
                     dateText.text = "Date: $date"
                     timeText.text = "Time: $startTime - $endTime"
                     purposeText.text = "Purpose: $purpose"
 
-                    // Add the inflated booking view to the parent layout
+
                     bookingsLayout.addView(bookingView)
                 }
             }

@@ -28,7 +28,7 @@ class BudgetActivity : AppCompatActivity() {
 
         eventSpinner = findViewById(R.id.eventSpinner)
 
-        // Load event names into the spinner
+
         loadEventNames()
 
         val valueEditText: EditText = findViewById(R.id.valueEditText)

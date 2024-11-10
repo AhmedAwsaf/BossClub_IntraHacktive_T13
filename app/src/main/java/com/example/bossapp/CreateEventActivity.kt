@@ -28,7 +28,7 @@ class CreateEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_event_activity)
 
-        // Initialize views
+
         eventNameEditText = findViewById(R.id.eventName)
         eventDescriptionEditText = findViewById(R.id.eventDescription)
         eventStartDateEditText = findViewById(R.id.eventStartDate)
@@ -36,11 +36,11 @@ class CreateEventActivity : AppCompatActivity() {
         eventFeaturesEditText = findViewById(R.id.eventFeatures)
         createEventButton = findViewById(R.id.createEventButton)
 
-        // Set up date pickers for start and end dates
+
         eventStartDateEditText.setOnClickListener { showDatePicker(eventStartDateEditText) }
         eventEndDateEditText.setOnClickListener { showDatePicker(eventEndDateEditText) }
 
-        // Create event button click listener
+
         createEventButton.setOnClickListener { createEvent() }
     }
 
@@ -100,7 +100,7 @@ class CreateEventActivity : AppCompatActivity() {
                         club = club.toString()          // Store the club
                     )
 
-                    // Save event to Firestore
+
                     db.collection("events").add(event)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Event created successfully!", Toast.LENGTH_SHORT).show()

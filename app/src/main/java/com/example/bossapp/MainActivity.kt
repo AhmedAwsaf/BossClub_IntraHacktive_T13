@@ -26,26 +26,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_menu)
 
-        // Initialize Firebase Auth and Firestore
+
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Load and display user data
+
         loadUserData()
 
-        // Check if the user is logged in, if not redirect to LoginActivity
+
         val currentUser = auth.currentUser
         if (currentUser == null) {
             redirectToLogin()
         }
 
-        // Setup button click listeners
+
         setupButtonListeners()
     }
 
-    // Function to handle button navigation
+
     private fun setupButtonListeners() {
-        // Navigate to different activities based on button clicks
+
         findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
             navigateToActivity(BookedRoomActivity::class.java)
         }
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             navigateToActivity(CommunicationActivity::class.java)
         }
 
-        // Handle survey button click with options dialog
+
         findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
             val currentUser = auth.currentUser
             val userId = currentUser?.uid ?: ""
@@ -90,13 +90,13 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        // Sign out button with confirmation
+
         findViewById<Button>(R.id.signoutBtn).setOnClickListener {
             showSignOutDialog()
         }
     }
 
-    // Show dialog for Survey options
+
     private fun showSurveyOptionsDialog() {
         val options = arrayOf("Create Survey", "Solve Survey")
         AlertDialog.Builder(this)
@@ -110,13 +110,13 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    // Generic function to navigate to a specified activity
+
     private fun navigateToActivity(activityClass: Class<*>) {
         val intent = Intent(this, activityClass)
         startActivity(intent)
     }
 
-    // Method to show sign-out confirmation dialog
+
     private fun showSignOutDialog() {
         AlertDialog.Builder(this)
             .setTitle("Sign Out")
@@ -130,14 +130,14 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    // Method to redirect to LoginActivity
+
     private fun redirectToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    // Method to load user data and display it on the menu screen
+
     private fun loadUserData() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -159,12 +159,12 @@ class MainActivity : AppCompatActivity() {
                             findViewById<LinearLayout>(R.id.commLayout).visibility = View.VISIBLE
                         }
 
-                        // Display user information
+
                         findViewById<TextView>(R.id.userNameText).text = username
                         findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
 
-                        // Show special panel button for OCA users
+
                         if (userType == "oca") {
                             findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
                             findViewById<TextView>(R.id.clubNameText).text = "OCA"

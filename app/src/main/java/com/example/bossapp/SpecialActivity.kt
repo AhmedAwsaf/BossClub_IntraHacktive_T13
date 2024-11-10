@@ -54,17 +54,17 @@ class SpecialActivity : AppCompatActivity() {
     }
 
     private fun addTextViewToLinearLayout(text: String) {
-        // Create a new TextView
+
         val textView = TextView(this)
 
-        // Set the text for the TextView
+
         textView.text = text
 
-        // Optionally, you can style the TextView (size, padding, etc.)
-        textView.textSize = 16f  // Set text size to 16sp
-        textView.setPadding(16, 16, 16, 16)  // Set padding for the TextView
 
-        // Add the TextView to the LinearLayout
+        textView.textSize = 16f
+        textView.setPadding(16, 16, 16, 16)
+
+
         linearLayoutButtons.addView(textView)
     }
 
@@ -105,16 +105,16 @@ class SpecialActivity : AppCompatActivity() {
         val button = Button(this)
         button.text = name + " - Event"
 
-        // Optionally, set button properties, e.g., padding, text size, background color
+
         button.textSize = 16f
         button.setPadding(16, 16, 16, 16)
 
-        // Set an OnClickListener if needed
+
         button.setOnClickListener {
             showEventDialog(event.eventName, event, eventId)
         }
 
-        // Add the button to the LinearLayout
+
         linearLayoutButtons.addView(button)
     }
 
@@ -122,16 +122,16 @@ class SpecialActivity : AppCompatActivity() {
         val button = Button(this)
         button.text = name + " - Budget Request"
 
-        // Optionally, set button properties, e.g., padding, text size, background color
+
         button.textSize = 16f
         button.setPadding(16, 16, 16, 16)
 
-        // Set an OnClickListener if needed
+
         button.setOnClickListener {
             showBudgetDialog(budgetRequest.reason, budgetRequest, budgetRequestId)
         }
 
-        // Add the button to the LinearLayout
+
         linearLayoutButtons.addView(button)
     }
 
@@ -142,13 +142,13 @@ class SpecialActivity : AppCompatActivity() {
             .setTitle(title)
             .setMessage(eventDetails)
             .setPositiveButton("Approve") { dialog, _ ->
-                // Handle the approve action
+
                 Toast.makeText(this, "$title approved", Toast.LENGTH_SHORT).show()
                 updateEventStatus(eventId, "approved")
                 dialog.dismiss()
             }
             .setNegativeButton("Reject") { dialog, _ ->
-                // Handle the reject action
+
                 Toast.makeText(this, "$title rejected", Toast.LENGTH_SHORT).show()
                 updateEventStatus(eventId, "rejected")
                 dialog.dismiss()
@@ -168,7 +168,7 @@ class SpecialActivity : AppCompatActivity() {
             .setTitle(title)
             .setMessage(budgetDetails)
             .setPositiveButton("Approve") { dialog, _ ->
-                // Handle the approve action
+
                 Toast.makeText(this, "$title approved", Toast.LENGTH_SHORT).show()
                 updateBudgetStatus(budgetRequestId, true)
                 dialog.dismiss()

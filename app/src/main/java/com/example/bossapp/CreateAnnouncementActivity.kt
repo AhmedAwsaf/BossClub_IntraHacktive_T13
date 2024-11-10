@@ -30,7 +30,7 @@ class CreateAnnouncementActivity : AppCompatActivity() {
         val deadlineDateEditText = findViewById<EditText>(R.id.deadlineDateEditText)
         val submitButton = findViewById<Button>(R.id.submitAnnouncementButton)
 
-        // Handle date picker
+
         deadlineDateEditText.setOnClickListener {
             val calendar = Calendar.getInstance()
             val datePicker = DatePickerDialog(this, { _, year, month, day ->
@@ -40,7 +40,7 @@ class CreateAnnouncementActivity : AppCompatActivity() {
             datePicker.show()
         }
 
-        // Handle form submission
+
         submitButton.setOnClickListener {
             val type = typeEditText.text.toString()
             val title = titleEditText.text.toString()

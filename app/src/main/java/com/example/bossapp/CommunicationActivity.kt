@@ -29,23 +29,23 @@ class CommunicationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.communication)
 
-        // Initialize views
+
         messageRecyclerView = findViewById(R.id.messageRecyclerView)
         messageInput = findViewById(R.id.messageInput)
         sendButton = findViewById(R.id.sendButton)
 
-        // Set up RecyclerView
+
         messageAdapter = MessageAdapter(messages)
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
 
-        // Fetch the current username from Firestore
+
         fetchCurrentUsername()
 
-        // Load existing messages from Firestore
+
         loadMessages()
 
-        // Handle sending a message
+
         sendButton.setOnClickListener {
             val messageText = messageInput.text.toString()
             if (messageText.isNotEmpty()) {
@@ -55,7 +55,7 @@ class CommunicationActivity : AppCompatActivity() {
         }
     }
 
-    // Fetch the current user's username from Firestore
+
     private fun fetchCurrentUsername() {
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         user?.let {
@@ -69,7 +69,7 @@ class CommunicationActivity : AppCompatActivity() {
         }
     }
 
-    // Function to send a message
+
     private fun sendMessage(text: String) {
         val message = Message(text, currentUsername, System.currentTimeMillis())
         db.collection("messages").add(message)
@@ -81,7 +81,7 @@ class CommunicationActivity : AppCompatActivity() {
             }
     }
 
-    // Load messages from Firestore in real-time
+
     private fun loadMessages() {
         db.collection("messages")
             .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.ASCENDING)
@@ -98,13 +98,13 @@ class CommunicationActivity : AppCompatActivity() {
                         val username = document.getString("username") ?: "Anonymous"
                         val timestamp = document.getLong("timestamp") ?: 0L
 
-                        // Check if timestamp is valid
+
                         if (timestamp != 0L) {
                             val message = Message(text, username, timestamp)
                             messages.add(message)
                         }
                     }
-                    // Sort messages manually as a safeguard
+
                     messages.sortBy { it.timestamp }
 
                     messageAdapter.notifyDataSetChanged()

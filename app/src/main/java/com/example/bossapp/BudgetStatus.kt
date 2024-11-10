@@ -27,7 +27,7 @@ class BudgetStatusActivity : AppCompatActivity() {
         db.collection("budget_requests").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    // Retrieve data from each document
+
                     val value = document.getString("value") ?: "N/A"
                     val reason = document.getString("reason") ?: "N/A"
                     val description = document.getString("description") ?: "N/A"
@@ -35,20 +35,20 @@ class BudgetStatusActivity : AppCompatActivity() {
                     val eventName = document.getString("eventName") ?: "N/A"
                     val approved = document.getBoolean("approved") ?: false
 
-                    // Create a container for each budget request with the custom background
+
                     val requestContainer = LinearLayout(this).apply {
                         orientation = LinearLayout.VERTICAL
                         setPadding(32, 32, 32, 32)
-                        setBackgroundResource(R.drawable.spinner_border) // Set the drawable as background
+                        setBackgroundResource(R.drawable.spinner_border)
                         val params = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                         )
-                        params.setMargins(0, 16, 0, 16) // Add margin between each container
+                        params.setMargins(0, 16, 0, 16)
                         layoutParams = params
                     }
 
-                    // Function to add label-value pairs for each budget request
+
                     fun addDetail(label: String, value: String) {
                         val textView = TextView(this).apply {
                             text = "$label: $value"
@@ -59,14 +59,14 @@ class BudgetStatusActivity : AppCompatActivity() {
                         requestContainer.addView(textView)
                     }
 
-                    // Add each detail to the container
+
                     addDetail("Value", value)
                     addDetail("Reason", reason)
                     addDetail("Description", description)
                     addDetail("Spend Amount", spendAmount)
                     addDetail("Event Name", eventName)
 
-                    // Highlight the approval status with more styling
+
                     val approvedStatus = TextView(this).apply {
                         text = if (approved) "Approved" else "Not Approved"
                         textSize = 18f
@@ -77,12 +77,12 @@ class BudgetStatusActivity : AppCompatActivity() {
                     }
                     requestContainer.addView(approvedStatus)
 
-                    // Add the styled request container to the main layout
+
                     budgetRequestContainer.addView(requestContainer)
                 }
             }
             .addOnFailureListener { exception ->
-                // Handle any errors
+
                 val errorTextView = TextView(this).apply {
                     text = "Failed to load budget requests: ${exception.message}"
                     setTextColor(Color.RED)

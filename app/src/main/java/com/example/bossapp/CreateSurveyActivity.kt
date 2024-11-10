@@ -39,7 +39,7 @@ class CreateSurveyActivity : AppCompatActivity() {
     }
 
     private fun addQuestionField() {
-        // Create a layout to hold the question field and the type spinner
+
         val questionLayout = LinearLayout(this)
         questionLayout.orientation = LinearLayout.HORIZONTAL
         questionLayout.layoutParams = LinearLayout.LayoutParams(
@@ -47,7 +47,7 @@ class CreateSurveyActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        // Create the question EditText
+
         val questionEditText = EditText(this)
         questionEditText.hint = "Enter Question"
         questionEditText.textSize = 16f
@@ -57,18 +57,18 @@ class CreateSurveyActivity : AppCompatActivity() {
             1f
         )
 
-        // Create the question type spinner
+
         val typeSpinner = Spinner(this)
         val types = arrayOf("Sentence", "True/False", "Out of 5")
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, types)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         typeSpinner.adapter = spinnerAdapter
 
-        // Add question EditText and type spinner to the question layout
+
         questionLayout.addView(questionEditText)
         questionLayout.addView(typeSpinner)
 
-        // Add the question layout to the main questions layout
+
         questionsLayout.addView(questionLayout)
     }
 

@@ -20,10 +20,10 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.createaccount)
 
-        // Initialize Firebase Auth
+
         auth = FirebaseAuth.getInstance()
 
-        // Set up the club Spinner
+
         val clubSpinner: Spinner = findViewById(R.id.clubSpinner)
         ArrayAdapter.createFromResource(
             this,
@@ -34,7 +34,7 @@ class CreateAccountActivity : AppCompatActivity() {
             clubSpinner.adapter = adapter
         }
 
-        // Other views and logic
+
         val createAccountButton = findViewById<Button>(R.id.createAccountButton)
         createAccountButton.setOnClickListener {
             val username = findViewById<EditText>(R.id.usernameEditText).text.toString()
@@ -46,7 +46,7 @@ class CreateAccountActivity : AppCompatActivity() {
             val semester = findViewById<EditText>(R.id.semesterEditText).text.toString()
             val department = findViewById<EditText>(R.id.departmentEditText).text.toString()
 
-            // Validation for fields
+
             if (username.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty() &&
                 selectedClub.isNotEmpty() && password.isNotEmpty() && semester.isNotEmpty() && department.isNotEmpty()
             ) {
@@ -58,13 +58,13 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun createUser(email: String, password: String, username: String, phoneNumber: String, semester: String, department: String, club: String, clubdept:String) {
-        // Check if the email has the correct domain
+
         if (email.endsWith("@g.bracu.ac.bd") || email.endsWith("@bracu.ac.bd")) {
-            // Proceed with account creation if the email domain is valid
+
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Account creation successful
+
                         val user = auth.currentUser
                         user?.let {
                             saveUserDataToFirestore(it.uid, username, phoneNumber, semester, department, club, clubdept)
@@ -73,12 +73,12 @@ class CreateAccountActivity : AppCompatActivity() {
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     } else {
-                        // Account creation failed
+
                         Toast.makeText(this, "Account creation failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         } else {
-            // Show an error message if the email domain is incorrect
+
             Toast.makeText(this, "Please use a BRACU email address (@g.bracu.ac.bd or @bracu.ac.bd)", Toast.LENGTH_SHORT).show()
         }
     }
@@ -86,7 +86,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun saveUserDataToFirestore(userId: String, username: String, phoneNumber: String, semester: String, department: String, club: String, clubdept:String) {
         val db = FirebaseFirestore.getInstance()
 
-        // Define the custom data for the user
+
         val userData = hashMapOf(
             "username" to username,
             "phoneNumber" to phoneNumber,
@@ -101,13 +101,13 @@ class CreateAccountActivity : AppCompatActivity() {
             "created_at" to FieldValue.serverTimestamp()
         )
 
-        // Save the custom user data in Firestore under the "users" collection
+
         db.collection("users").document(userId)
             .set(userData)
             .addOnSuccessListener {
                 Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show()
 
-                // Navigate to LoginActivity upon successful account creation
+
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()

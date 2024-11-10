@@ -17,37 +17,12 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_menu)
 
-        // Initialize Firebase Auth and Firestore
+
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Fetch user data and display it
+
         loadUserData()
-
-        // Set up button click listeners
-        findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
-            // TODO: Navigate to the Event activity
-        }
-
-        findViewById<ImageButton>(R.id.budgetButton).setOnClickListener {
-            // TODO: Navigate to the Budget activity
-        }
-
-        findViewById<ImageButton>(R.id.roomButton).setOnClickListener {
-            // TODO: Navigate to the Room activity
-        }
-
-        findViewById<ImageButton>(R.id.announcementButton).setOnClickListener {
-            // TODO: Navigate to the Announcement activity
-        }
-
-        findViewById<ImageButton>(R.id.surveyButton).setOnClickListener {
-            // TODO: Navigate to the Survey activity
-        }
-
-        findViewById<ImageButton>(R.id.communicateButton).setOnClickListener {
-            // TODO: Navigate to the Communicate activity
-        }
     }
 
     private fun loadUserData() {
@@ -62,7 +37,7 @@ class MenuActivity : AppCompatActivity() {
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
 
-                        // Display data on the menu screen
+
                         findViewById<TextView>(R.id.userNameText).text = username
                         findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"

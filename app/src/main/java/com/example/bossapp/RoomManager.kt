@@ -95,8 +95,7 @@ class RoomManager : AppCompatActivity() {
     }
 
     private fun addBooking(roomNumber: String) {
-        // Logic to add a booking
-        // Update Firestore with new booking in the "bookings" array
+
     }
 
     private fun deleteRoom(roomNumber: String) {

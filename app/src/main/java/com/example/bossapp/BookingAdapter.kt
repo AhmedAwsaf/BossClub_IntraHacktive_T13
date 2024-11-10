@@ -32,7 +32,7 @@ class BookingAdapter(private val bookings: List<Booking>) :
     override fun onBindViewHolder(holder: BookingViewHolder, position: Int) {
         val booking = bookings[position]
 
-        // Use string resources with placeholders
+
         holder.clubName.text = holder.itemView.context.getString(R.string.club_name_placeholder, booking.clubName)
         holder.date.text = holder.itemView.context.getString(R.string.date_placeholder, booking.date)
         holder.time.text = holder.itemView.context.getString(R.string.time_placeholder, booking.startTime, booking.endTime)
