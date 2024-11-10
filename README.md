@@ -99,3 +99,4 @@ The BossClub app is built using a combination of modern technologies to ensure h
 - **Advanced Analytics**: Providing club leaders with insights on event attendance, engagement metrics, and budget utilization.
 - **External Calendar Sync**: Allow users to sync club events with their personal calendars for better scheduling integration.
 - **Feedback System**: Implement a system for gathering member feedback on events and the app itself to guide future improvements.
+- **Loading Animation**: More animations to be incorporated for better visualization.
