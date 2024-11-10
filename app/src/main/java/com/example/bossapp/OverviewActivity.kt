@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.Spinner
+import com.google.firebase.auth.FirebaseAuth
 
 data class User(
     val username: String = "",
@@ -38,6 +39,7 @@ data class User(
 class OverviewActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
     private lateinit var linearLayoutContainer: LinearLayout
 
     private lateinit var dataTypeSpinner: Spinner
@@ -47,6 +49,7 @@ class OverviewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_overview)
 
         db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
         linearLayoutContainer = findViewById(R.id.linearLayoutContainer)
         dataTypeSpinner = findViewById(R.id.dataTypeSpinner)
         val dataTypes = listOf("Users", "Events", "Budget Requests", "Room Bookings")
@@ -74,6 +77,25 @@ class OverviewActivity : AppCompatActivity() {
 
         // Initially fetch the first category data (Users)
         // fetchUsers()
+    }
+
+    private fun getCLRLevel(callback: (Int) -> Unit) {
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid ?: ""
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
+                    callback(clr_level)
+                } else {
+                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    callback(1) // Return default value if user not found
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show()
+                callback(1) // Return default value in case of error
+            }
     }
 
 
@@ -235,8 +257,15 @@ class OverviewActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             showUserDetailsDialog(user)
         }
-        linearLayoutContainer.addView(cardView)
-        linearLayoutContainer.addView(editUserButton)
+
+        getCLRLevel { clrLevel ->
+            // Use clrLevel here
+            println("CLR Level: $clrLevel")
+            linearLayoutContainer.addView(cardView)
+            if (clrLevel >= 3){
+                linearLayoutContainer.addView(editUserButton)
+            }
+        }
     }
 
     private fun addEventView(event: Event, documentId: String) {
@@ -268,7 +297,6 @@ class OverviewActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setOnClickListener {
-                // Show the edit dialog for User
                 showEditDialog(dataType = "Event", documentId = documentId, dataObject = event, name = event.eventName)
             }
         }
@@ -277,8 +305,16 @@ class OverviewActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             showEventDetailsDialog(event)
         }
-        linearLayoutContainer.addView(cardView)
-        linearLayoutContainer.addView(editUserButton)
+
+        getCLRLevel { clrLevel ->
+            linearLayoutContainer.addView(cardView)
+            // Use clrLevel here
+            println("CLR Level: $clrLevel")
+            if (clrLevel >= 4){
+                linearLayoutContainer.addView(editUserButton)
+            }
+        }
+
     }
 
     private fun addBudgetRequestView(budgetRequest: BudgetRequest, documentId: String) {
@@ -295,8 +331,6 @@ class OverviewActivity : AppCompatActivity() {
             ).apply {
                 setMargins(0, 16, 0, 16)
             }
-
-
         }
 
         val budgetTextView = TextView(this).apply {
@@ -324,7 +358,14 @@ class OverviewActivity : AppCompatActivity() {
 
         linearLayoutContainer.addView(cardView)
 
-        linearLayoutContainer.addView(editUserButton)
+        getCLRLevel { clrLevel ->
+            // Use clrLevel here
+            println("CLR Level: $clrLevel")
+            linearLayoutContainer.addView(cardView)
+            if (clrLevel >= 4){
+                linearLayoutContainer.addView(editUserButton)
+            }
+        }
     }
 
     private fun showUserDetailsDialog(user: User) {
@@ -395,6 +436,13 @@ class OverviewActivity : AppCompatActivity() {
                 editTexts["user_type"] = createEditText("User Type", user.user_type, linearLayout)
                 editTexts["club_role"] = createEditText("Club Role", user.club_role, linearLayout)
                 editTexts["club_clr_level"] = createEditText("Club Color Level", user.club_clr_level.toString(), linearLayout)
+                getCLRLevel { clrLevel ->
+                    // Use clrLevel here
+                    println("CLR Level: $clrLevel")
+                    if (clrLevel < 4 && editTexts["club_clr_level"]?.text.toString() != "4"){
+                        editTexts["club_clr_level"]?.setText("3")
+                    }
+                }
                 editTexts["club_dept"] = createEditText("Club Department", user.club_dept, linearLayout)
             }
             "Event" -> {
