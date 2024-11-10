@@ -43,6 +43,10 @@ class SpecialActivity : AppCompatActivity() {
             val intent = Intent(this, OverviewActivity::class.java)
             startActivity(intent)
         }
+        findViewById<Button>(R.id.RoomManageBtn).setOnClickListener{
+            val intent = Intent(this, RoomManager::class.java)
+            startActivity(intent)
+        }
 
         fetchEvents()
 

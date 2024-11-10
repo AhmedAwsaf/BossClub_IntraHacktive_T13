@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -12,71 +13,72 @@
         android:text="EDIT WINDOW"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Username"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/phoneField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Phone Number"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/departmentField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Department"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/eventNameField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Event Name"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/eventDescriptionField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Event Description"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/budgetValueField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Budget Value"
         android:inputType="numberDecimal"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/budgetReasonField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Budget Reason"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/roomNameField"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:hint="Room Name"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.bossapp
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -35,6 +36,12 @@ class BudgetActivity : AppCompatActivity() {
         val descriptionEditText: EditText = findViewById(R.id.descriptionEditText)
         val spendAmountEditText: EditText = findViewById(R.id.spendAmountEditText)
         val submitButton: Button = findViewById(R.id.submitButton)
+        val budgetstatus : Button = findViewById(R.id.budgetStatus)
+
+        budgetstatus.setOnClickListener {
+            val intent = Intent(this, BudgetStatusActivity::class.java)
+            startActivity(intent)
+        }
 
         submitButton.setOnClickListener {
             val value = valueEditText.text.toString()
@@ -49,6 +56,7 @@ class BudgetActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private fun loadEventNames() {

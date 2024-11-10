@@ -32,14 +32,11 @@ class RoomActivity : AppCompatActivity() {
         val bookRoomButton: Button = findViewById(R.id.submitButton)
         roomSpinner = findViewById(R.id.roomSpinner)
 
-        // Set up time pickers
         startTimePicker.setIs24HourView(false)
         endTimePicker.setIs24HourView(false)
 
-        // Populate room spinner with room IDs from Firestore
         populateRoomSpinner()
 
-        // Handle date selection from CalendarView
         datePicker.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
@@ -47,7 +44,6 @@ class RoomActivity : AppCompatActivity() {
             selectedDate = dateFormat.format(calendar.time)
         }
 
-        // Handle room booking on button click
         bookRoomButton.setOnClickListener {
             val startTime = formatTime(startTimePicker.hour, startTimePicker.minute)
             val endTime = formatTime(endTimePicker.hour, endTimePicker.minute)
@@ -65,12 +61,14 @@ class RoomActivity : AppCompatActivity() {
         }
     }
 
-    // Populate the room spinner with room IDs from Firestore
     private fun populateRoomSpinner() {
         db.collection("roomlist").get().addOnSuccessListener { documents ->
             val roomIds = mutableListOf<String>()
             for (document in documents) {
-                roomIds.add(document.id) // Use document ID as room ID
+                val available = document.getBoolean("available") ?: false
+                if (available){
+                    roomIds.add(document.id)
+                }
             }
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roomIds)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -85,7 +83,6 @@ class RoomActivity : AppCompatActivity() {
         }
     }
 
-    // Check if selected date and time are in the future
     private fun isFutureDateTime(date: String, time: String): Boolean {
         val currentDateTime = Calendar.getInstance().time
         val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault())
@@ -93,7 +90,6 @@ class RoomActivity : AppCompatActivity() {
         return selectedDateTime?.after(currentDateTime) == true
     }
 
-    // Check if the end time is after the start time
     private fun isEndTimeAfterStartTime(startTime: String, endTime: String): Boolean {
         val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         val start = timeFormat.parse(startTime)
@@ -101,7 +97,6 @@ class RoomActivity : AppCompatActivity() {
         return end?.after(start) == true
     }
 
-    // Format time to AM/PM format
     private fun formatTime(hour: Int, minute: Int): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, hour)
@@ -110,7 +105,6 @@ class RoomActivity : AppCompatActivity() {
         return timeFormat.format(calendar.time)
     }
 
-    // Check for overlapping bookings and save the new booking if available
     private fun checkAndBookRoom(
         roomId: String,
         purpose: String,
@@ -155,7 +149,6 @@ class RoomActivity : AppCompatActivity() {
         }
     }
 
-    // Save booking details to Firestore with room document ID
     private fun saveRoomBookingToFirestore(
         roomId: String,
         purpose: String,

@@ -1,6 +1,7 @@
 package com.example.bossapp
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -14,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.Spinner
 
@@ -224,7 +226,7 @@ class OverviewActivity : AppCompatActivity() {
             )
             setOnClickListener {
                 // Show the edit dialog for User
-                showEditDialog(dataType = "User", documentId = documentId, dataObject = user)
+                showEditDialog(dataType = "User", documentId = documentId, dataObject = user, name = user.username)
             }
         }
 
@@ -267,7 +269,7 @@ class OverviewActivity : AppCompatActivity() {
             )
             setOnClickListener {
                 // Show the edit dialog for User
-                showEditDialog(dataType = "Event", documentId = documentId, dataObject = event)
+                showEditDialog(dataType = "Event", documentId = documentId, dataObject = event, name = event.eventName)
             }
         }
 
@@ -311,7 +313,7 @@ class OverviewActivity : AppCompatActivity() {
             )
             setOnClickListener {
                 // Show the edit dialog for User
-                showEditDialog(dataType = "Budget Request", documentId = documentId, dataObject = budgetRequest)
+                showEditDialog(dataType = "Budget Request", documentId = documentId, dataObject = budgetRequest, name = budgetRequest.reason)
             }
         }
 
@@ -375,65 +377,103 @@ class OverviewActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun showEditDialog(dataType: String, documentId: String, dataObject: Any) {
+    private fun showEditDialog(dataType: String, documentId: String, dataObject: Any, name: String) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_edit_data, null)
+        val linearLayout = dialogView.findViewById<LinearLayout>(R.id.edit_linear_layout)
+        val editTexts = mutableMapOf<String, EditText>()
 
-        // Configure the view based on dataType
+        // Populate the fields based on data type
         when (dataType) {
             "User" -> {
-                dialogView.findViewById<EditText>(R.id.usernameField).visibility = View.VISIBLE
-                dialogView.findViewById<EditText>(R.id.phoneField).visibility = View.VISIBLE
-                dialogView.findViewById<EditText>(R.id.departmentField).visibility = View.VISIBLE
+                val user = dataObject as User
+                //editTexts["username"] = createEditText("Username", user.username, linearLayout)
+                //editTexts["phoneNumber"] = createEditText("Phone Number", user.phoneNumber, linearLayout)
+                //editTexts["semester"] = createEditText("Semester", user.semester, linearLayout)
+                //editTexts["department"] = createEditText("Department", user.department, linearLayout)
+                editTexts["club"] = createEditText("Club", user.club, linearLayout)
+                //editTexts["profilePictureUrl"] = createEditText("Profile Picture URL", user.profilePictureUrl, linearLayout)
+                editTexts["user_type"] = createEditText("User Type", user.user_type, linearLayout)
+                editTexts["club_role"] = createEditText("Club Role", user.club_role, linearLayout)
+                editTexts["club_clr_level"] = createEditText("Club Color Level", user.club_clr_level.toString(), linearLayout)
+                editTexts["club_dept"] = createEditText("Club Department", user.club_dept, linearLayout)
             }
             "Event" -> {
-                dialogView.findViewById<EditText>(R.id.eventNameField).visibility = View.VISIBLE
-                dialogView.findViewById<EditText>(R.id.eventDescriptionField).visibility = View.VISIBLE
+                val event = dataObject as Event
+                //editTexts["eventName"] = createEditText("Event Name", event.eventName, linearLayout)
+                editTexts["eventDescription"] = createEditText("Event Description", event.eventDescription, linearLayout)
+                editTexts["eventStartDate"] = createEditText("Event Start Date", event.eventStartDate.toString(), linearLayout)
+                editTexts["eventEndDate"] = createEditText("Event End Date", event.eventEndDate.toString(), linearLayout)
+                //editTexts["club"] = createEditText("Club", event.club, linearLayout)
             }
             "Budget Request" -> {
-                dialogView.findViewById<EditText>(R.id.budgetValueField).visibility = View.VISIBLE
-                dialogView.findViewById<EditText>(R.id.budgetReasonField).visibility = View.VISIBLE
+                val budgetRequest = dataObject as BudgetRequest
+                editTexts["value"] = createEditText("Budget Value", budgetRequest.value.toString(), linearLayout)
+                //editTexts["reason"] = createEditText("Reason", budgetRequest.reason, linearLayout)
+                editTexts["description"] = createEditText("Description", budgetRequest.description, linearLayout)
+                editTexts["spendAmount"] = createEditText("Spend Amount", budgetRequest.spendAmount.toString(), linearLayout)
+                editTexts["eventName"] = createEditText("Event Name", budgetRequest.eventName, linearLayout)
             }
-            "Room Booking" -> {
-                dialogView.findViewById<EditText>(R.id.roomNameField).visibility = View.VISIBLE
-            }
+            // Add other cases if needed
         }
 
-        val builder = AlertDialog.Builder(this).apply {
+        AlertDialog.Builder(this).apply {
             setTitle("Edit $dataType")
+            setMessage(name)
             setView(dialogView)
             setPositiveButton("Save") { _, _ ->
-                val newValues = getUpdatedValues(dialogView, dataType)
+                val newValues = getUpdatedValues(editTexts, dataType)
                 updateFirestoreData(dataType, documentId, newValues)
             }
             setNegativeButton("Cancel", null)
-        }
-        builder.create().show()
+        }.create().show()
     }
 
-    // Get new values from dialog fields
-    private fun getUpdatedValues(view: View, dataType: String): Map<String, Any> {
+    // Helper function to create EditText with pre-populated text
+    private fun createEditText(hint: String, preFill: String, parent: LinearLayout): EditText {
+        val editText = EditText(this)
+        editText.hint = hint
+        editText.setText(preFill)  // Set existing data here
+        editText.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        parent.addView(editText)
+        return editText
+    }
+
+
+    // Create a CalendarView for date selection
+    private fun createCalendarView(label: String, parent: LinearLayout): CalendarView {
+        val calendarView = CalendarView(this).apply {
+            setOnDateChangeListener { _, year, month, day ->
+                tag = "$year-${String.format("%02d", month + 1)}-${String.format("%02d", day)}"
+            }
+        }
+        parent.addView(TextView(this).apply { text = label })
+        parent.addView(calendarView)
+        return calendarView
+    }
+
+    // Retrieve updated values from input fields
+    private fun getUpdatedValues(editTexts: Map<String, View>, dataType: String): Map<String, Any> {
         val values = mutableMapOf<String, Any>()
 
-        when (dataType) {
-            "User" -> {
-                values["username"] = view.findViewById<EditText>(R.id.usernameField).text.toString()
-                values["phoneNumber"] = view.findViewById<EditText>(R.id.phoneField).text.toString()
-                values["department"] = view.findViewById<EditText>(R.id.departmentField).text.toString()
-            }
-            "Event" -> {
-                values["name"] = view.findViewById<EditText>(R.id.eventNameField).text.toString()
-                values["description"] = view.findViewById<EditText>(R.id.eventDescriptionField).text.toString()
-            }
-            "Budget Request" -> {
-                values["value"] = view.findViewById<EditText>(R.id.budgetValueField).text.toString()
-                values["reason"] = view.findViewById<EditText>(R.id.budgetReasonField).text.toString()
-            }
-            "Room Booking" -> {
-                values["roomName"] = view.findViewById<EditText>(R.id.roomNameField).text.toString()
+        for ((key, view) in editTexts) {
+            when (view) {
+                is EditText -> {
+                    // Check if the field is numeric to handle club_clr_level properly
+                    values[key] = if (key == "club_clr_level") {
+                        view.text.toString().toIntOrNull() ?: 0 // Use 0 or handle error as needed
+                    } else {
+                        view.text.toString()
+                    }
+                }
+                is CalendarView -> values[key] = view.tag as? String ?: ""
             }
         }
         return values
     }
+
 
     // Update Firestore data based on collection
     private fun updateFirestoreData(dataType: String, documentId: String, updatedValues: Map<String, Any>) {
@@ -455,7 +495,4 @@ class OverviewActivity : AppCompatActivity() {
                 }
         }
     }
-
-
-
 }
