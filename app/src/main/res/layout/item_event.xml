@@ -5,33 +5,32 @@
     android:orientation="vertical"
     android:padding="12dp"
     android:background="@drawable/event_item_background"
-    android:layout_marginBottom="8dp">
-
+    android:layout_marginBottom="16dp">
 
     <TextView
-        android:id="@+id/eventNameText"
+        android:id="@+id/eventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/eventDescriptionText"
+        android:id="@+id/eventDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="4dp" />
 
     <TextView
-        android:id="@+id/eventDateText"
+        android:id="@+id/eventDates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
-        android:textColor="@color/black" />
+        android:textColor="@android:color/darker_gray" />
 
     <TextView
-        android:id="@+id/eventStatusText"
+        android:id="@+id/eventFeatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textColor="@android:color/holo_blue_dark" />
 </LinearLayout>
