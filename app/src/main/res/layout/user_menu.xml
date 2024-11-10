@@ -185,7 +185,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:visibility="gone">
 
             <ImageButton
                 android:id="@+id/communicateButton"
@@ -213,6 +214,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="8dp"
+            android:visibility="gone"
             tools:ignore="ExtraText">
 
             <ImageButton

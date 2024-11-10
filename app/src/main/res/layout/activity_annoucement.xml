@@ -38,16 +38,6 @@
             android:layout_marginBottom="16dp" />
 
         <!-- Container for displaying announcements dynamically -->
-        <LinearLayout
-            android:id="@+id/announcementsContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:divider="?android:attr/dividerVertical"
-            android:showDividers="middle"
-            android:padding="8dp" />
-
-        <!-- Create Announcement Hyperlink -->
         <TextView
             android:id="@+id/createAnnouncementLink"
             android:layout_width="wrap_content"
@@ -60,7 +50,19 @@
             android:text="Create a new announcement"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/announcementsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="?android:attr/dividerVertical"
+            android:showDividers="middle"
+            android:padding="8dp" />
+
+        <!-- Create Announcement Hyperlink -->
 
     </LinearLayout>
 </ScrollView>

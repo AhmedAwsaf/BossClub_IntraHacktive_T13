@@ -5,20 +5,25 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.bossapp.R
+import com.google.firebase.auth.FirebaseAuth
 
 class BookedRoomActivity : AppCompatActivity() {
 
     private val db: FirebaseFirestore = Firebase.firestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.booked_room)
+
+        auth = FirebaseAuth.getInstance()
 
         val newbook = findViewById<TextView>(R.id.bookLink)
 
@@ -31,6 +36,25 @@ class BookedRoomActivity : AppCompatActivity() {
 
         // Load bookings from Firestore
         loadBookings()
+    }
+
+    private fun showBookButton(){
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid ?: ""
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
+                    if(clr_level <= 1) {
+                        findViewById<TextView>(R.id.bookLink).visibility = View.GONE
+                    } else {
+                        findViewById<TextView>(R.id.bookLink).visibility = View.VISIBLE
+                    }
+                }
+                else {
+                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun loadBookings() {

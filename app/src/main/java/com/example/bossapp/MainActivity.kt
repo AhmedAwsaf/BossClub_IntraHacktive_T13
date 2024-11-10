@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
                         val club = document.getString("club") ?: ""
                         val department = document.getString("department") ?: ""
                         val userType = document.getString("user_type") ?: ""
-                        val clr_level = document.getLong("clr_level")?.toInt() ?: 1
+                        val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
                         if(clr_level <= 1) {
                             Log.d("MainActivity", "clr_level: $clr_level")
                             findViewById<LinearLayout>(R.id.budgetLayout).visibility = View.GONE

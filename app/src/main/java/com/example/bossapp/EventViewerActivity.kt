@@ -10,6 +10,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
@@ -20,12 +21,17 @@ class EventViewerActivity : AppCompatActivity() {
     private lateinit var eventsLayout: LinearLayout
     private val db = FirebaseFirestore.getInstance()
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_viewer)
 
         eventsLayout = findViewById(R.id.eventsLayout)
+
+        auth = FirebaseAuth.getInstance()
+
+        showEventButton()
 
         // Load events sorted by eventStartDate in ascending order
         loadEvents()
@@ -34,6 +40,25 @@ class EventViewerActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.createEventLink).setOnClickListener {
             startActivity(Intent(this, CreateEventActivity::class.java))
         }
+    }
+
+    private fun showEventButton(){
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid ?: ""
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
+                    if(clr_level <= 1) {
+                        findViewById<TextView>(R.id.createEventLink).visibility = View.GONE
+                    } else {
+                        findViewById<TextView>(R.id.createEventLink).visibility = View.VISIBLE
+                    }
+                }
+                else {
+                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun loadEvents() {
