@@ -120,6 +120,11 @@
             android:exported="true"
             android:label="Survey"/>
 
+        <activity
+            android:name=".RoomManager"
+            android:exported="true"
+            android:label="Manage all rooms"/>
+
 
 
 

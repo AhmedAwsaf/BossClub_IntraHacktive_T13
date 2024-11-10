@@ -65,7 +65,10 @@ class RoomActivity : AppCompatActivity() {
         db.collection("roomlist").get().addOnSuccessListener { documents ->
             val roomIds = mutableListOf<String>()
             for (document in documents) {
-                roomIds.add(document.id)
+                val available = document.getBoolean("available") ?: false
+                if (available){
+                    roomIds.add(document.id)
+                }
             }
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roomIds)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
