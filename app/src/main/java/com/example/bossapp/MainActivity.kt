@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity() {
             navigateToActivity(BudgetActivity::class.java)
         }
 
-        findViewById<Button>(R.id.specialBtn).setOnClickListener {
-            navigateToActivity(SpecialActivity::class.java)
-        }
-
         findViewById<ImageButton>(R.id.eventButton).setOnClickListener {
             navigateToActivity(EventViewerActivity::class.java)
         }
@@ -147,6 +143,8 @@ class MainActivity : AppCompatActivity() {
                     if (document != null && document.exists()) {
                         val username = document.getString("username") ?: ""
                         val club = document.getString("club") ?: ""
+                        val club_role = document.getString("club_role") ?: ""
+                        val club_dept = document.getString("club_dept") ?: ""
                         val department = document.getString("department") ?: ""
                         val userType = document.getString("user_type") ?: ""
                         val clr_level = document.getLong("club_clr_level")?.toInt() ?: 1
@@ -154,19 +152,32 @@ class MainActivity : AppCompatActivity() {
                             Log.d("MainActivity", "clr_level: $clr_level")
                             findViewById<LinearLayout>(R.id.budgetLayout).visibility = View.GONE
                             findViewById<LinearLayout>(R.id.commLayout).visibility = View.GONE
-                        } else {
+                        }
+                        else {
                             findViewById<LinearLayout>(R.id.budgetLayout).visibility = View.VISIBLE
                             findViewById<LinearLayout>(R.id.commLayout).visibility = View.VISIBLE
+                            if (clr_level == 4){
+                                findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
+                                findViewById<Button>(R.id.specialBtn).setOnClickListener {
+                                    navigateToActivity(SpecialActivity::class.java)
+                                }
+                            } else if (clr_level == 3) {
+                                findViewById<Button>(R.id.specialBtn).text = "Data Panel"
+                                findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
+                                findViewById<Button>(R.id.specialBtn).setOnClickListener {
+                                    navigateToActivity(OverviewActivity::class.java)
+                                }
+                            }
+
                         }
 
 
                         findViewById<TextView>(R.id.userNameText).text = username
-                        findViewById<TextView>(R.id.clubNameText).text = "Club: $club"
+                        findViewById<TextView>(R.id.clubNameText).text = "$club $club_dept - $club_role "
                         findViewById<TextView>(R.id.club_deptText).text = "Department: $department"
 
 
                         if (userType == "oca") {
-                            findViewById<Button>(R.id.specialBtn).visibility = View.VISIBLE
                             findViewById<TextView>(R.id.clubNameText).text = "OCA"
                             findViewById<TextView>(R.id.club_deptText).text = "Admin"
                         }

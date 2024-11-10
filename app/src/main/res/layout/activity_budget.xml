@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Budget Image -->
         <ImageView
             android:id="@+id/budgetImage"
             android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp" />
 
-        <!-- Value Input -->
+
         <EditText
             android:id="@+id/valueEditText"
             android:layout_width="match_parent"
@@ -28,7 +27,6 @@
             android:inputType="number"
             android:minHeight="48dp" />
 
-        <!-- Event Selection Spinner -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
 
-        <!-- Reason Input -->
         <EditText
             android:id="@+id/reasonEditText"
             android:layout_width="match_parent"
@@ -51,7 +48,6 @@
             android:hint="Enter Reason"
             android:minHeight="48dp" />
 
-        <!-- Description Input -->
         <EditText
             android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
@@ -61,7 +57,7 @@
             android:inputType="textMultiLine"
             android:lines="3" />
 
-        <!-- Spend Amount Input -->
+
         <EditText
             android:id="@+id/spendAmountEditText"
             android:layout_width="match_parent"
@@ -71,7 +67,6 @@
             android:inputType="number"
             android:minHeight="48dp" />
 
-        <!-- Submit Button -->
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"

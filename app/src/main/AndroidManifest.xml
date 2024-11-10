@@ -13,7 +13,6 @@
         android:theme="@style/Theme.BossApp"
         tools:targetApi="31">
 
-        <!-- Splash Activity as the Launcher Activity -->
         <activity
 
             android:name=".SplashActivity"
@@ -26,26 +25,22 @@
             </intent-filter>
         </activity>
 
-        <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.BossApp" />
 
-        <!-- Main Activity (optional, if needed later) -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.BossApp" />
 
-        <!-- Admin Login Activity -->
         <activity
             android:name=".AdminLoginActivity"
             android:exported="true"
             android:label="Admin Login"
             android:theme="@style/Theme.BossApp" />
 
-        <!-- Create Account Activity -->
         <activity
             android:name=".CreateAccountActivity"
             android:exported="true"
@@ -89,10 +84,6 @@
             android:name=".CommunicationActivity"
             android:exported="true"
             android:label="Creates Events"/>
-    <!--<activity-->
-    <!--    android:name=".MessageAdapter"-->
-    <!--    android:exported="true"-->
-    <!--    android:label="Creates Events"/>-->
 
 
         <activity

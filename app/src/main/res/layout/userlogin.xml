@@ -8,9 +8,7 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Image at the top of the login screen -->
 
-    <!-- Username input with rounded corners -->
     <ImageView
         android:id="@+id/loginImage"
         android:layout_width="203dp"
@@ -31,7 +29,7 @@
         android:inputType="text"
         android:padding="16dp" />
 
-    <!-- Password input with rounded corners -->
+
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
@@ -43,7 +41,7 @@
         android:inputType="textPassword"
         android:padding="16dp" />
 
-    <!-- Login button with rounded corners and shadow -->
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
@@ -57,21 +55,7 @@
         android:text="Login"
         android:textColor="#FFFFFF" />
 
-    <!-- Hyperlink for Admin Login -->
-<!--    <TextView-->
-<!--        android:id="@+id/adminLoginLink"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:clickable="true"-->
-<!--        android:fontFamily="sans-serif-medium"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:text="Admin Login"-->
-<!--        android:textColor="#6200EA"-->
-<!--        android:textSize="16sp" />-->
 
-    <!-- Hyperlink for Create an Account -->
     <TextView
         android:id="@+id/createAccountLink"
         android:layout_width="wrap_content"

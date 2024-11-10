@@ -7,14 +7,14 @@
     android:gravity="center"
     android:background="#FFFFFF">
 
-    <!-- Logo for the Splash Screen -->
+
     <ImageView
         android:layout_width="360dp"
         android:layout_height="451dp"
         android:contentDescription="App Logo"
         android:src="@drawable/boss"
         tools:ignore="HardcodedText" />
-    <!-- res/layout/activity_main.xml -->
+
 
 
 </LinearLayout>

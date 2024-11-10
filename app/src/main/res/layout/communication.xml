@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".CommunicationActivity">
 
-    <!-- Toolbar -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_gravity="center" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- RecyclerView for displaying messages -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:padding="8dp"
         android:clipToPadding="false" />
 
-    <!-- Input Container for typing messages -->
+
     <LinearLayout
         android:id="@+id/messageInputContainer"
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
         android:background="@color/gray_light"
         android:elevation="4dp">
 
-        <!-- Text Input for typing messages -->
+
         <EditText
             android:id="@+id/messageInput"
             android:layout_width="0dp"
@@ -63,7 +63,7 @@
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray" />
 
-        <!-- Send Button -->
+
         <ImageButton
             android:id="@+id/sendButton"
             android:layout_width="48dp"

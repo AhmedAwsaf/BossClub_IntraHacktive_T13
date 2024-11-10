@@ -14,7 +14,6 @@
         android:padding="8dp"
         android:background="@color/white">
 
-        <!-- Announcement Image at the top -->
         <ImageView
             android:id="@+id/announcementImage"
             android:layout_width="match_parent"
@@ -24,7 +23,7 @@
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp" />
 
-        <!-- Heading for Announcement Panel -->
+
         <TextView
             android:id="@+id/announcementTitle"
             android:layout_width="match_parent"
@@ -37,7 +36,7 @@
             android:padding="16dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Container for displaying announcements dynamically -->
+
         <TextView
             android:id="@+id/createAnnouncementLink"
             android:layout_width="wrap_content"
@@ -62,7 +61,7 @@
             android:showDividers="middle"
             android:padding="8dp" />
 
-        <!-- Create Announcement Hyperlink -->
+
 
     </LinearLayout>
 </ScrollView>

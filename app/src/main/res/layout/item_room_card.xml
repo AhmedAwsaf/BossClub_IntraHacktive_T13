@@ -1,4 +1,4 @@
-<!-- res/layout/item_room_card.xml -->
+
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Room Number and Availability Toggle -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
 
         </LinearLayout>
 
-        <!-- Booking Counter -->
+
         <TextView
             android:id="@+id/bookingCounterText"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:text="Bookings: 0"
             android:textSize="14sp" />
 
-        <!-- Add Booking and Delete Room Buttons -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
