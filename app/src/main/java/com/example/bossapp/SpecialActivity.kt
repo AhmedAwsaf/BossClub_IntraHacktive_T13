@@ -39,9 +39,12 @@ class SpecialActivity : AppCompatActivity() {
 
         linearLayoutButtons = findViewById<LinearLayout>(R.id.linearLayoutButtons)
 
+        findViewById<Button>(R.id.button).setOnClickListener{
+            val intent = Intent(this, OverviewActivity::class.java)
+            startActivity(intent)
+        }
 
         fetchEvents()
-
 
         fetchBudgets()
     }
@@ -85,7 +88,7 @@ class SpecialActivity : AppCompatActivity() {
                 addTextViewToLinearLayout("Waiting for approval budgets")
                 for (document in documents) {
                     val budgetRequest = document.toObject(BudgetRequest::class.java)
-                    createBudgetRequestButton(budgetRequest.eventName, budgetRequest, document.id)
+                    createBudgetRequestButton(budgetRequest.reason, budgetRequest, document.id)
                 }
 
             }
@@ -99,7 +102,7 @@ class SpecialActivity : AppCompatActivity() {
         button.text = name + " - Event"
 
         // Optionally, set button properties, e.g., padding, text size, background color
-        button.textSize = 20f
+        button.textSize = 16f
         button.setPadding(16, 16, 16, 16)
 
         // Set an OnClickListener if needed
@@ -116,7 +119,7 @@ class SpecialActivity : AppCompatActivity() {
         button.text = name + " - Budget Request"
 
         // Optionally, set button properties, e.g., padding, text size, background color
-        button.textSize = 20f
+        button.textSize = 16f
         button.setPadding(16, 16, 16, 16)
 
         // Set an OnClickListener if needed

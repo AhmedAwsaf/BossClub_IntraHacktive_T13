@@ -101,6 +101,11 @@
             android:label="Does special features only for OCA"/>
 
         <activity
+            android:name=".OverviewActivity"
+            android:exported="true"
+            android:label="Overview of all data"/>
+
+        <activity
             android:name=".CreateSurveyActivity"
             android:exported="true"
             android:label="Survey"/>
