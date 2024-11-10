@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Image at the top of the admin login screen -->
+
     <ImageView
         android:id="@+id/adminLoginImage"
         android:layout_width="254dp"
@@ -18,7 +18,7 @@
         android:contentDescription="Admin Portal Logo"
         android:src="@drawable/admin" />
 
-    <!-- Admin username input -->
+
     <EditText
         android:id="@+id/adminUsernameEditText"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:inputType="text"
         android:padding="16dp" />
 
-    <!-- Admin password input -->
+
     <EditText
         android:id="@+id/adminPasswordEditText"
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:inputType="textPassword"
         android:padding="16dp" />
 
-    <!-- Login button with rounded corners -->
+
     <Button
         android:id="@+id/adminLoginButton"
         android:layout_width="match_parent"

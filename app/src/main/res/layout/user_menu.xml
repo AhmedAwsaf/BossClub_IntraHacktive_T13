@@ -9,14 +9,14 @@
     android:padding="16dp"
     android:background="@color/white">
 
-    <!-- Styled Menu Heading -->
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="109dp"
         app:srcCompat="@drawable/boss" />
 
-    <!-- Menu Buttons in GridLayout -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="81dp"
@@ -71,7 +71,7 @@
         android:columnCount="2"
         android:columnOrderPreserved="false">
 
-        <!-- Announcements Button with Label -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
 
                 android:textSize="16sp" />
         </LinearLayout>
-        <!-- Event Button with Label -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
         </LinearLayout>
 
 
-        <!-- Room Booking Button with Label -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
         </LinearLayout>
 
 
-        <!-- Survey Button with Label -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Communicate Button with Label -->
+
         <LinearLayout
             android:id="@+id/commLayout"
             android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Budget Button with Label -->
+
         <LinearLayout
             android:id="@+id/budgetLayout"
             android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
 
     </GridLayout>
 
-    <!-- User Info Section -->
+
 
     <LinearLayout
         android:layout_width="match_parent"

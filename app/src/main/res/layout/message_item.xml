@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <!-- MaterialCardView with rounded corners and border -->
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Message Text (White background with black text) -->
+
             <TextView
                 android:id="@+id/messageText"
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:padding="8dp"
                 android:background="@android:color/white" />
 
-            <!-- Username (light gray text) -->
+
             <TextView
                 android:id="@+id/usernameText"
                 android:layout_width="match_parent"

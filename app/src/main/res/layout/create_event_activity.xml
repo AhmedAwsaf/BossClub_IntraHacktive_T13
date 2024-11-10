@@ -5,21 +5,21 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Event Name -->
+
     <EditText
         android:id="@+id/eventName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Event Name" />
 
-    <!-- Event Description -->
+
     <EditText
         android:id="@+id/eventDescription"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Event Description" />
 
-    <!-- Event Start Date (Date Picker) -->
+
     <EditText
         android:id="@+id/eventStartDate"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:focusable="false"
         android:clickable="true" />
 
-    <!-- Event End Date (Date Picker) -->
+
     <EditText
         android:id="@+id/eventEndDate"
         android:layout_width="match_parent"
@@ -37,14 +37,14 @@
         android:focusable="false"
         android:clickable="true" />
 
-    <!-- Event Features -->
+
     <EditText
         android:id="@+id/eventFeatures"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Event Features (comma separated)" />
 
-    <!-- Button to create the event -->
+
     <Button
         android:id="@+id/createEventButton"
         android:layout_width="wrap_content"

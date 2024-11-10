@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:background="@color/white">
 
-    <!-- Announcement Type -->
+
     <EditText
         android:id="@+id/typeEditText"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Announcement Title -->
+
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Club Name -->
+
     <EditText
         android:id="@+id/clubNameEditText"
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Announcement Details -->
+
     <EditText
         android:id="@+id/detailsEditText"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Deadline Date (Clickable for Date Picker) -->
+
     <EditText
         android:id="@+id/deadlineDateEditText"
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         android:clickable="true"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Button to create the announcement -->
+
     <Button
         android:id="@+id/submitAnnouncementButton"
         android:layout_width="248dp"
