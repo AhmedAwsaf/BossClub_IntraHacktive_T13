@@ -261,7 +261,7 @@ class OverviewActivity : AppCompatActivity() {
             // Use clrLevel here
             println("CLR Level: $clrLevel")
             linearLayoutContainer.addView(cardView)
-            if (clrLevel >= 3){
+            if (clrLevel >= 3 && user.club_clr_level <4){
                 linearLayoutContainer.addView(editUserButton)
             }
         }
