@@ -71,9 +71,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:background="@android:color/holo_red_dark"
                 android:padding="8dp"
                 android:text="Delete Room"
-                android:textColor="@android:color/holo_red_dark" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

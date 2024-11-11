@@ -356,8 +356,6 @@ class OverviewActivity : AppCompatActivity() {
             showBudgetRequestDetailsDialog(budgetRequest)
         }
 
-        linearLayoutContainer.addView(cardView)
-
         getCLRLevel { clrLevel ->
             // Use clrLevel here
             println("CLR Level: $clrLevel")
