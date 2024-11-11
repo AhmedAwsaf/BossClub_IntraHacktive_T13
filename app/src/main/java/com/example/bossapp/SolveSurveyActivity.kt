@@ -1,5 +1,6 @@
 package com.example.bossapp
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -66,29 +67,57 @@ class SolveSurveyActivity : AppCompatActivity() {
     }
 
     private fun addQuestionView(questionText: String, questionType: String) {
-        val questionTextView = TextView(this).apply {
+        val context = this
+
+        val questionTextView = TextView(context).apply {
             text = questionText
-            textSize = 16f
+            textSize = 18f
+            setTypeface(null, Typeface.BOLD)
+            setPadding(16, 16, 16, 8)
         }
         responseLayout.addView(questionTextView)
 
         when (questionType) {
             "Sentence" -> {
-                val answerEditText = EditText(this).apply {
+                val answerEditText = EditText(context).apply {
                     hint = "Enter your answer"
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        setMargins(0, 8, 0, 16)
+                    }
                 }
                 responseLayout.addView(answerEditText)
             }
             "True/False" -> {
-                val optionsGroup = RadioGroup(this)
-                val trueOption = RadioButton(this).apply { text = "True" }
-                val falseOption = RadioButton(this).apply { text = "False" }
+                val optionsGroup = RadioGroup(context).apply {
+                    orientation = RadioGroup.HORIZONTAL
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        setMargins(0, 8, 0, 16)
+                    }
+                }
+
+                val trueOption = RadioButton(context).apply {
+                    text = "True"
+                    textSize = 16f
+                    setPadding(8, 8, 8, 8)
+                }
+                val falseOption = RadioButton(context).apply {
+                    text = "False"
+                    textSize = 16f
+                    setPadding(8, 8, 8, 8)
+                }
+
                 optionsGroup.addView(trueOption)
                 optionsGroup.addView(falseOption)
                 responseLayout.addView(optionsGroup)
             }
             "Out of 5" -> {
-                val ratingBar = RatingBar(this).apply {
+                val ratingBar = RatingBar(context).apply {
                     numStars = 5
                     stepSize = 1f
                     rating = 0f
@@ -102,14 +131,23 @@ class SolveSurveyActivity : AppCompatActivity() {
                 responseLayout.addView(ratingBar)
             }
             else -> {
-
-                val answerEditText = EditText(this).apply {
+                val answerEditText = EditText(context).apply {
                     hint = "Enter your answer"
+                    textSize = 16f
+                    setPadding(16, 8, 16, 8)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        setMargins(0, 8, 0, 16)
+                    }
                 }
                 responseLayout.addView(answerEditText)
             }
         }
     }
+
+
 
     private fun submitSurveyResponses() {
         val responses = mutableListOf<Map<String, Any>>()
