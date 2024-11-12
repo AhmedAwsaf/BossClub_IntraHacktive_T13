@@ -1,5 +1,27 @@
 # BossClub App
 
+
+<p align="center">
+  <img src="./app/src/main/res/drawable/boss.png" alt="IntraHacktive Logo" width="50%">
+</p>
+
+<p align="center">
+  <img src=".\intrahacktive-logo-purple-white.webp" alt="IntraHacktive Logo" width="50%">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Awarded-Second%20Runners%20Up-brightgreen?style=for-the-badge" alt="Second Runners Up Badge">
+</p>
+
+> **🏅 Second Runners Up**  
+> This project earned the Second Runners Up position at **IntraHacktive 1.0**, a prestigious hackathon at BRAC University!
+
+---
+
+### Overview
+Welcome to our project! We’re Team Watermelon, a dedicated team of developers and innovators from BRAC University. This project represents our hard work, creativity, and collaboration, and we’re excited to share it with you. Check out the rest of the README to learn more about our work and how you can contribute!
+
+
 ## Table of Contents
 
 1. [Description](#description)
@@ -7,10 +29,10 @@
 3. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
    - [Installation](#installation)
-4. [Technical Stack and Architecture](#technicalstackandarchitecture)
-5. [User Guide](#userguide)
-6. [Challenges and Solutions](#challengesandsolutions)
-7. [Future Enhancements](#futureenhancements)
+4. [Technical Stack and Architecture](#technical-stack-and-architecture)
+5. [User Guide](#user-guide)
+6. [Challenges and Solutions](#challenges-and-solutions)
+7. [Future Enhancements](#future-enhancements)
 8. [Contributing](#contributing)
 
 ## Description
@@ -41,11 +63,30 @@ BossClub is a mobile application designed for streamlined management of club act
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/BossClub.git
    ```
+
 2. Open the project in Android Studio.
 3. Sync the project with Gradle and run on an emulator or device.
+
+Alternate method
+
+1. Open Android Studio: Launch Android Studio. On the Welcome screen, choose "Get from VCS". If you’re already in a project, go to File > New > Project from Version Control.
+
+2. Enter Repository URL:
+
+3. In the "URL" field, paste the repository link:
+
+   ```bash
+   git clone https://github.com/yourusername/BossClub.git
+   ```
+
+4. Select a directory where you want to clone the project locally.
+5. Clone the Repository: Click Clone. Android Studio will download the project files and set up the workspace automatically.
+
+
 
 ### Open the project
 
@@ -100,3 +141,24 @@ The BossClub app is built using a combination of modern technologies to ensure h
 - **External Calendar Sync**: Allow users to sync club events with their personal calendars for better scheduling integration.
 - **Feedback System**: Implement a system for gathering member feedback on events and the app itself to guide future improvements.
 - **Loading Animation**: More animations to be incorporated for better visualization.
+
+## Contributing
+
+### 🍉 Team Watermelon
+
+<div align="center">
+
+| Contributor        | GitHub Profile                                                                                 | Followers                                                                                           |
+|--------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Ahmed Awsaf**    | [![Ahmed's GitHub](https://img.shields.io/badge/-AhmedAwsaf-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AhmedAwsaf) | ![Followers](https://img.shields.io/github/followers/AhmedAwsaf?label=Follow&style=social)          |
+| **Zaima Mashiat**  | [![Zaima's GitHub](https://img.shields.io/badge/-zaimamashiat-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zaimamashiat) | ![Followers](https://img.shields.io/github/followers/zaimamashiat?label=Follow&style=social)       |
+| **Abrar Jahin Alvee** | [![Abrar's GitHub](https://img.shields.io/badge/-abraralvee-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/abraralvee) | ![Followers](https://img.shields.io/github/followers/abraralvee?label=Follow&style=social)          |
+
+</div>
+
+---
+
+Thank you for visiting our project! 🌟 We welcome contributions and suggestions from the community.  
+Feel free to follow us, connect, and check out our work!
+
+
